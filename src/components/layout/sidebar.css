@@ -1,0 +1,7 @@
+.animate {
+    transition: .3s ease;
+}
+
+.animate:hover {
+    padding-left: 7px;
+}
