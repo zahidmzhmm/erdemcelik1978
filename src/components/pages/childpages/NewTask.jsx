@@ -13,7 +13,7 @@ export default function NewTask() {
       <div className="overflow-x-hidden">
         <div className="bg-pr px-3 py-3 md:px-8 md:py-8 rounded-md">
           <div className="md:mt-0 md:col-span-2">
-            <h1 className="text-center text-xl font-medium text-gray-200">
+            <h1 className="text-center text-3xl font-medium text-gray-200">
               NEW TASK
             </h1>
             <form className="mt-8 space-y-6" action="#" method="POST">

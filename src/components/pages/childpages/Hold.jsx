@@ -1,8 +1,10 @@
 import { MDBDataTable } from "mdbreact";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { MainWrapper } from "../../../App";
 import "./progress.css";
 const Hold = () => {
+  const { setModalShow} = useContext(MainWrapper);
   const data = {
     columns: [
       {
@@ -54,7 +56,7 @@ const Hold = () => {
         address: "Austin, texas",
         email: "adon@gmail.com",
         send: (
-          <button className="bg-sr text-white px-2 py-1 rounded-md">
+          <button onClick={()=> setModalShow(true)}  className="bg-sr text-white px-2 py-1 rounded-md">
             send
           </button>
         ),
@@ -72,7 +74,7 @@ const Hold = () => {
   return (
     <>
       <div className="bg-pr text-white p-4 rounded-md">
-        <h1 className="text-white font-medium text-center text-xl">HOLD TASKS</h1>
+        <h1 className="text-white font-medium text-center text-3xl">HOLD TASKS</h1>
         <MDBDataTable responsiveMd hover bordered data={data} />
       </div>
     </>

@@ -1,11 +1,7 @@
 import { MDBDataTable } from "mdbreact";
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { MainWrapper } from "../../../App";
+import React from "react";
 import "./progress.css";
-
-const Progress = () => {
-  const { setModalShow } = useContext(MainWrapper);
+const Archive = () => {
   const data = {
     columns: [
       {
@@ -40,13 +36,10 @@ const Progress = () => {
         width: 200,
       },
       {
-        field: "send",
+        field: "download",
         width: 200,
       },
-      {
-        field: "edit",
-        width: 200,
-      },
+    
     ],
     rows: [
       {
@@ -56,21 +49,12 @@ const Progress = () => {
         phone: "+0011223344",
         address: "Austin, texas",
         email: "adon@gmail.com",
-        send: (
-          <button
-            onClick={() => setModalShow(true)}
-            className="bg-sr text-white px-2 py-1 rounded-md"
-          >
-            send
+        download: (
+          <button className="bg-sr text-white px-2 py-1 rounded-md">
+           Delete
           </button>
-        ),
-        edit: (
-          <Link to={"/edit/" + 1}>
-            <button className="bg-sr text-white px-2 py-1 rounded-md">
-              edit
-            </button>
-          </Link>
-        ),
+        )
+        
       },
     ],
   };
@@ -78,13 +62,11 @@ const Progress = () => {
   return (
     <>
       <div className="bg-pr text-white p-4 rounded-md">
-        <h1 className="text-white font-medium text-center text-3xl">
-          PROGRESS TASKS
-        </h1>
+        <h1 className="text-white font-medium text-center text-3xl">ARCHIVE</h1>
         <MDBDataTable responsiveMd hover bordered data={data} />
       </div>
     </>
   );
 };
 
-export default Progress;
+export default Archive;

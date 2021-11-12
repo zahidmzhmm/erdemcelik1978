@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Sidebar from "../layout/Sidebar";
 import Topbar from "../layout/Topbar";
+import Archive from "./childpages/Archive";
+import Complete from "./childpages/Complete";
 import Dashboardpage from "./childpages/Dashboardpage";
 import Edit from "./childpages/Edit";
 import Hold from "./childpages/Hold";
@@ -13,28 +15,34 @@ const Dashboard = ({ page }) => {
   const [toggle, setToggle] = useState(false);
   const ChoosePage = (props) => {
     const selectpage = props.selectpage;
-    console.log(selectpage);
+    // console.log(selectpage);
     if (selectpage === "dashboard") {
-      return <Dashboardpage />
+      return <Dashboardpage />;
     }
     if (selectpage === "newtask") {
-      return <NewTask />
+      return <NewTask />;
     }
     if (selectpage === "progress") {
-      return <Progress />
+      return <Progress />;
     }
     if (selectpage === "edit") {
-      return <Edit />
+      return <Edit />;
     }
     if (selectpage === "hold") {
-      return <Hold />
+      return <Hold />;
+    }
+    if (selectpage === "complete") {
+      return <Complete />;
+    }
+    if (selectpage === "archive") {
+      return <Archive />;
     }
   };
   return (
     <>
       <div className="grid grid-cols-5 overflow-x-hidden w-screen gap-2">
         <div>
-          <Sidebar toggle={toggle} />
+          <Sidebar toggle={toggle} setToggle={setToggle} />
         </div>
 
         <div
@@ -45,7 +53,8 @@ const Dashboard = ({ page }) => {
           }
         >
           <Topbar setToggle={setToggle} toggle={toggle} />
-          <div className="mx-5">{<ChoosePage selectpage={page}/>}</div>
+        
+          <div className="mx-5">{<ChoosePage selectpage={page} />}</div>
         </div>
       </div>
     </>
