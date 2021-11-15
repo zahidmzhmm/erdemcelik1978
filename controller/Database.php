@@ -37,11 +37,21 @@ class Database
         }
     }
 
+    public function insert2($sql, $table, $order = "id")
+    {
+        $insert = $this->query($sql);
+        if ($insert == true) {
+            return $this->fetchArray("select * from `$table` where 1 order by `$order` desc");
+        } else {
+            return false;
+        }
+    }
+
     public function delete($sql)
     {
         $query = $this->query($sql);
         if ($query == true) {
-            $this->core->response("Successfully Deleted");
+            $this->core->response("Successfully Deleted", "success", 200);
         } else {
             $this->core->response("Data not Found!");
         }

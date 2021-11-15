@@ -22,7 +22,8 @@ class Users
         if (empty($email) || empty($password)) {
             $this->core->response("Email & Password Required");
         } else {
-            $fetch = $this->database->fetchArray("select * from users where `email`='$email' and `password`='$password'");
+            $token = sha1(md5($email . $password));
+            $fetch = $this->database->fetchArray("select * from users where `token`='$token'");
             if ($fetch !== false) {
                 $this->core->response("Success", "success", 200, $fetch['token']);
             } else {
@@ -36,8 +37,10 @@ class Users
         $name = $this->database->real_scape_str($data['name']);
         $email = $data['email'];
         $password = $data['password'];
-        $role = $data['role'];
         $token = sha1(md5($email . $password));
+        $phone = !empty($data['phone']) ? $data['phone'] : "";
+        $whatsapp = !empty($data['whatsapp']) ? $data['whatsapp'] : "";
+        $role = $data['role'];
         if (empty($name) || empty($email) || empty($password) || empty($role) || empty($token)) {
             $this->core->response("All Field Required");
             exit;
@@ -47,7 +50,12 @@ class Users
             $this->core->response("User already exist");
             exit;
         }
-        $this->database->insert("INSERT INTO `users`(`name`, `email`, `password`, `role`, `token`) VALUES ('$name','$email','$password','$role','$token')", "users");
+        $this->database->insert("
+        insert into users
+            (name,email, phone, whatsapp, token, password, role)
+        values
+            ('$name','$email', '$phone', '$whatsapp', '$token', '$password', '$role');
+        ", "users");
     }
 
     public function edit($data)
@@ -56,8 +64,10 @@ class Users
         $name = $this->database->real_scape_str($data['name']);
         $email = $data['email'];
         $password = $data['password'];
-        $role = $data['role'];
         $token = sha1(md5($email . $password));
+        $phone = !empty($data['phone']) ? $data['phone'] : "";
+        $whatsapp = !empty($data['whatsapp']) ? $data['whatsapp'] : "";
+        $role = $data['role'];
         if (empty($name) || empty($email) || empty($password) || empty($role) || empty($token)) {
             $this->core->response("All Field Required");
             exit;
@@ -67,7 +77,12 @@ class Users
             $this->core->response("User already exist");
             exit;
         }
-        $this->database->update("UPDATE `users` SET `name`='$name',`email`='$email',`password`='$password',`role`='$role',`token`='$token' WHERE id='$id'", "users", $id);
+        $this->database->update("
+        UPDATE  `users`
+        SET
+            `name`='$name',`email`='$email',`password`='$password',`token`='$token',`phone`='$phone',whatsapp='$whatsapp',role='$role'
+        WHERE id='$id'
+        ", "users", $id);
     }
 
     public function view($id)

@@ -1,19 +1,13 @@
 Website Update:
 
-title
-subTitle
-title2
-content1
-content2
-link
-phone1
-phone2
-email
-address
-twitter
-facebook
-instagram
-youtube
-linkedin
-pinterest
+Task Status Progress =>
+3. progress
+2. hold
+1. complete
 
+<br>
+User Role Status =>
+
+1. user 
+2. admin
+3. staff 

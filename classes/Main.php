@@ -9,11 +9,13 @@ class Main
 
     private $db;
     private $core;
+    private $mailer;
 
     public function __construct()
     {
         $this->db = new Database();
         $this->core = new Core();
+        $this->mailer = new Mailer();
     }
 
     public function select($name)
@@ -25,42 +27,91 @@ class Main
         exit;
     }
 
-    public function contact($data)
+    public function send($data)
     {
-        $name = $this->db->real_scape_str($data['name']);
-        $email = $this->db->real_scape_str($data['email']);
-        $subject = $this->db->real_scape_str($data['subject']);
-        $message = $this->db->real_scape_str($data['message']);
-        if (empty($name) || empty($email) || empty($subject) || empty($message)) {
+        $staff_id = $data['staff_id'];
+        $task_id = $data['task_id'];
+        $role = $data['role'];
+        if (empty($staff_id) || empty($task_id) || empty($role)) {
+            $this->core->response("All Field is required");
+        } else {
+            $response = $this->db->insert2("
+            insert into send_alert
+                (staff_id, task_id, role)
+            VALUES
+                ('$staff_id','$task_id','$role')
+            ", "send_alert");
+            if ($response !== false) {
+                $this->sendAlert($response['id']);
+            } else {
+                $this->core->response("Something went wrong");
+            }
+        }
+    }
+
+    public function sendAlert($id)
+    {
+        if (empty($id)) {
             $this->core->response("All Field is required");
             exit;
         }
-        $this->db->insert("INSERT INTO `contact`(`name`, `email`, `subject`, `message`) VALUES ('$name','$email','$subject','$message')", "contact");
-    }
-
-    public function enquiry($data)
-    {
-        $name = $this->db->real_scape_str($data['name']);
-        $email = $this->db->real_scape_str($data['email']);
-        $phone = $this->db->real_scape_str($data['phone']);
-        $location = $this->db->real_scape_str($data['location']);
-        $course = $this->db->real_scape_str($data['course']);
-        $message = $this->db->real_scape_str($data['message']);
-        if (empty($name) || empty($location) || empty($course) || empty($email) || empty($phone) || empty($message)) {
-            $this->core->response("All Field is required");
-            exit;
+        $data = $this->db->fetchArray("
+        select
+            sa.id as sa_id,
+            u.id as user_id,
+            u.name as user_name,
+            u.email as user_email,
+            u.phone as user_phone,
+            u.role as user_role,
+            t.id as task_id,
+            t.c_name as task_cname,
+            t.name as task_name,
+            t.phone as task_phone,
+            t.address as task_address,
+            t.email as task_email,
+            t.files as task_files,
+            t.notes as task_notes,
+            t.status as task_status
+        from send_alert as sa
+                 join users u on sa.staff_id = u.id
+                 join tasks t on sa.task_id = t.id
+        where sa.id='$id'
+        ");
+        if ($data !== false) {
+            $sa_id = $data['sa_id'];
+            $user_name = $data['user_name'];
+            $user_email = $data['user_email'];
+            $body = URL_ROOT . "/staff/task/addData/" . $sa_id;
+            $this->mailer->task_mail($user_email, $body);
+            $this->core->response("Success", "success", 200, $data);
+        } else {
+            $this->core->response("Data not found");
         }
-        $this->db->insert("INSERT INTO `enquiry`(`name`, `email`, `phone`, `location`, `course`, `message`) VALUES ('$name','$email','$phone','$location','$course','$message')", "enquiry");
     }
 
-    public function view_all_enquiry()
+    public function alerts()
     {
-
-        // $data = $this->db->fetchAll("SELECT enquiry.name as en_name,enquiry.id as en_id,`email`,`phone`,`location`,courses.name as course_name,`message`
-        //                                  FROM enquiry
-        //                                  INNER JOIN courses
-        //                                  ON enquiry.course = courses.id order by enquiry.id desc");
-        $data = $this->db->fetchAll("SELECT * from enquiry order by id desc");
+        $data = $this->db->fetchAll("
+        select
+               sa.id as sa_id,
+               u.id as user_id,
+               u.name as user_name,
+               u.email as user_email,
+               u.phone as user_phone,
+               u.role as user_role,
+               t.id as task_id,
+               t.c_name as task_cname,
+               t.name as task_name,
+               t.phone as task_phone,
+               t.address as task_address,
+               t.email as task_email,
+               t.files as task_files,
+               t.notes as task_notes,
+               t.status as task_status
+        from send_alert as sa
+            join users u on sa.staff_id = u.id
+            join tasks t on sa.task_id = t.id
+        ");
         if ($data !== false) {
             $this->core->response("Success", "success", 200, $data);
         } else {
@@ -68,32 +119,13 @@ class Main
         }
     }
 
-    public function view_all_contact()
+    public function ntwc()
     {
-
-        $data = $this->db->fetchAll("SELECT * from contact order by id desc");
-        if ($data !== false) {
-            $this->core->response("Success", "success", 200, $data);
-        } else {
-            $this->core->response("Data not found");
-        }
-    }
-    public function delete_contact($id)
-    {
-        $checking = $this->db->num_rows("select id from contact where id='$id'");
-        if ($checking > 0) {
-            $this->db->delete("DELETE FROM `contact` WHERE id='$id'");
-            exit;
-        }
-        $this->core->response("Data not found!");
-    }
-    public function delete_enquiry($id)
-    {
-        $checking = $this->db->num_rows("select id from enquiry where id='$id'");
-        if ($checking > 0) {
-            $this->db->delete("DELETE FROM `enquiry` WHERE id='$id'");
-            exit;
-        }
-        $this->core->response("Data not found!");
+        $newTask = $this->db->num_rows("select id from tasks where status=3");
+        $waitTask = $this->db->num_rows("select id from tasks where status=2");
+        $doneTask = $this->db->num_rows("select id from tasks where status=1");
+        $this->core->response("Success", "success", 200,
+            ["newTask" => $newTask, "waitTask" => $waitTask, "doneTask" => $doneTask]
+        );
     }
 }
