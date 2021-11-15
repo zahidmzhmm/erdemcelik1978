@@ -10,7 +10,7 @@ class Mailer
     public function task_mail($email, $body)
     {
         $mail = new PHPMailer();
-        $mail->SMTPDebug = 4;
+        $mail->SMTPDebug = false;
         $mail->isSMTP();
         $mail->Host = MAILER_HOST;
         $mail->SMTPAuth = true;
