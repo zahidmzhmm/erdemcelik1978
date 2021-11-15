@@ -81,7 +81,7 @@ class Main
             $sa_id = $data['sa_id'];
             $user_name = $data['user_name'];
             $user_email = $data['user_email'];
-            $body = URL_ROOT . "/staff/task/addData/" . $sa_id;
+            $body = API_URI . "/staff/task/addData/" . $sa_id;
             $this->mailer->task_mail($user_email, $body);
             $this->core->response("Success", "success", 200, $data);
         } else {
