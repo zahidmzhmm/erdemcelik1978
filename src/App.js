@@ -1,5 +1,5 @@
 import React, { createContext } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import Login from "./components/auth/Login";
 import SendModal from "./components/pages/childpages/SendModal";
 import Dashboard from "./components/pages/Dashboard";
@@ -14,6 +14,9 @@ function App() {
           {/* <Login /> */}{" "}
           <SendModal />
           <Switch>
+            <Route exact path="/">
+            <Redirect to="/login" />
+            </Route>{" "}
             <Route exact path="/login">
               <Login />
             </Route>{" "}

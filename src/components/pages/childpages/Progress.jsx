@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { MainWrapper } from "../../../App";
 import "./progress.css";
-
 const Progress = () => {
   const { setModalShow } = useContext(MainWrapper);
   const data = {
