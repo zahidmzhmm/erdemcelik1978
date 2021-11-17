@@ -1,10 +1,8 @@
-import React, {useContext} from "react";
+import React from "react";
 import {MDBDataTable} from "mdbreact";
 import {Link} from "react-router-dom";
-import {MainWrapper} from "../../App";
-import "./progress.css";
+import "../pages/progress.css";
 import {GetAny} from "../../main";
-import SendModal from "./SendModal";
 import {UserDataContext} from "../Private";
 
 const StaffProgress = () => {

@@ -15,6 +15,7 @@ import Users from "./components/pages/Users";
 import Delete from "./components/pages/Delete";
 import StaffPrivate from "./components/StaffPrivate";
 import AddData from "./components/staff/AddData";
+import StaffProgress from "./components/staff/StaffProgress";
 
 export const MainWrapper = createContext();
 
@@ -45,11 +46,14 @@ function App() {
                             <Progress/>
                         </Private>
                         <StaffPrivate exact path="/staff/progress">
-                            <Progress/>
+                            <StaffProgress/>
                         </StaffPrivate>
                         <StaffPrivate exact path="/staff/task/addData/:id">
                             <AddData/>
                         </StaffPrivate>
+                        <Private exact path="/edit/:id">
+                            <Edit/>
+                        </Private>
                         <Private exact path="/delete/:id">
                             <Delete page={'archive'}/>
                         </Private>
