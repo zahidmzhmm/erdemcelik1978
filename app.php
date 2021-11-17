@@ -17,6 +17,10 @@ switch ($url) {
         $id = $main->select("id");
         $users->view($id);
         break;
+    case "viewUserToken":
+        $token = $main->select("token");
+        $users->viewToken($token);
+        break;
     case "deleteUser":
         $id = $main->select("id");
         $users->delete($id);

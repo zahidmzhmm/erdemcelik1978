@@ -42,7 +42,7 @@ class Main
                 ('$staff_id','$task_id','$role')
             ", "send_alert");
             if ($response !== false) {
-                $this->sendAlert($response['id']);
+                $this->sendAlert($response['task_id']);
             } else {
                 $this->core->response("Something went wrong");
             }

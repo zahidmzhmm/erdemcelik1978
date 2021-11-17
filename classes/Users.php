@@ -95,6 +95,16 @@ class Users
         }
     }
 
+    public function viewToken($id)
+    {
+        $data = $this->database->fetchArray("SELECT * FROM `users` WHERE token='$id'");
+        if ($data !== false) {
+            $this->core->response("Success", "success", 200, $data);
+        } else {
+            $this->core->response("Data not found");
+        }
+    }
+
     public function view_all()
     {
         $data = $this->database->fetchAll("SELECT * FROM `users` order by id desc");

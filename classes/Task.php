@@ -18,6 +18,8 @@ class Task
 
     public function add($data)
     {
+        $start = $this->db->real_scape_str($data['start']);
+        $end = $this->db->real_scape_str($data['end']);
         $c_name = $this->db->real_scape_str($data['c_name']);
         $name = $this->db->real_scape_str($data['name']);
         $phone = $this->db->real_scape_str($data['phone']);
@@ -32,15 +34,17 @@ class Task
         }
         $this->db->insert("
         insert into tasks
-        (c_name, name, phone, address, email, files, notes, status)
+        (start, end, c_name, name, phone, address, email, files, notes, status)
         values
-        ('$c_name','$name', '$phone', '$address', '$email', '$files','$notes', '$status');
+        ('$start','$end','$c_name','$name', '$phone', '$address', '$email', '$files','$notes', '$status');
         ", "tasks");
     }
 
     public function edit($data)
     {
         $id = $data['id'];
+        $start = $this->db->real_scape_str($data['start']);
+        $end = $this->db->real_scape_str($data['end']);
         $c_name = $this->db->real_scape_str($data['c_name']);
         $name = $this->db->real_scape_str($data['name']);
         $phone = $this->db->real_scape_str($data['phone']);
@@ -48,14 +52,15 @@ class Task
         $email = $this->db->real_scape_str($data['email']);
         $notes = $this->db->real_scape_str($data['notes']);
         $status = $data['status'];
-        $files = !empty($_FILES['files']['name']) ? $this->core->file_upload("files") : "";
+        $files1 = !empty($_FILES['files1']['name']) ? $this->core->file_upload("files1") : "";
+        $files2 = !empty($_FILES['files2']['name']) ? $this->core->file_upload("files2") : "";
         if (empty($id) || empty($c_name) || empty($name) || empty($phone) || empty($address) || empty($email) || empty($status)) {
             $this->core->response("All Field Required");
             exit;
         }
         $this->db->update("
         update tasks
-        set c_name='$c_name',name='$name',phone='$phone',address='$address',email='$email',files='$files',notes='$notes',status='$status'
+        set start='$start',end='$end',c_name='$c_name',name='$name',phone='$phone',address='$address',email='$email',files1='$files1',files2='$files2',notes='$notes',status='$status'
         where id='$id'
         ", "tasks", $id);
     }
