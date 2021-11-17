@@ -7,17 +7,16 @@ import {GetAny} from "../../main";
 import SendModal from "./SendModal";
 import {UserDataContext} from "../Private";
 
-const Progress = () => {
+const StaffProgress = () => {
     const userData = React.useContext(UserDataContext);
     const [progressData, setProgressData] = React.useState(false);
     React.useEffect(() => {
         if (progressData === false) {
-            GetAny("tasks").then((response) => {
+            GetAny("alerts").then((response) => {
                 setProgressData(response.data)
             })
         }
     })
-
     if (progressData !== false) {
         const data = {
             columns: [
@@ -58,33 +57,24 @@ const Progress = () => {
             ],
             rows:
                 progressData.map((data, index) =>
-                    data.status == 3 &&
-                    ({
-                        id: data.id,
-                        company: data.c_name,
-                        name: data.name,
-                        phone: data.phone,
-                        address: data.address,
-                        email: data.email,
-                        action: (
-                            userData.role == 'admin' ?
+                    data.task_status == 3 && data.user_id == userData.id ?
+                        ({
+                            id: data.task_id,
+                            company: data.task_cname,
+                            name: data.task_name,
+                            phone: data.task_phone,
+                            address: data.task_phone,
+                            email: data.task_phone,
+                            action: (
                                 <>
-                                    <SendModal data2={data}/>
-                                    <Link to={"/edit/" + data.id}>
-                                        <button className="bg-sr ml-2 text-white px-2 py-1 rounded-md">
-                                            Edit
-                                        </button>
-                                    </Link>
-                                </> :
-                                <>
-                                    <Link to={"/staff/task/addData/" + data.id}>
+                                    <Link to={"/staff/task/addData/" + data.task_id}>
                                         <button className="bg-sr ml-2 text-white px-2 py-1 rounded-md">
                                             Add Data
                                         </button>
                                     </Link>
                                 </>
-                        )
-                    })
+                            )
+                        }) : ""
                 )
         };
         return (
@@ -103,4 +93,4 @@ const Progress = () => {
     }
 };
 
-export default Progress;
+export default StaffProgress;

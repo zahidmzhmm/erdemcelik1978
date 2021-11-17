@@ -2,7 +2,7 @@
 import axios from "axios";
 import {toast} from "react-toastify";
 
-export const mainURI = "http://localhost/erdemcelik1978";
+export const mainURI = "https://erdemcelik.fazgroupltd.com";
 export const apiURI = mainURI + "/api/";
 export const headers = {
     'x-api-key': 'admin12123'

@@ -6,8 +6,11 @@ import * as React from "react";
 import {BsThreeDotsVertical} from "react-icons/bs";
 import {IoCheckmarkDoneCircle} from "react-icons/io5";
 import {PostAny, responseToast} from "../../main";
+import {useParams, useHistory} from 'react-router-dom';
 
-export default function NewTask() {
+export default function AddData() {
+    const {id} = useParams();
+    const history = useHistory();
     const [start, setStart] = React.useState(new Date());
     const [end, setEnd] = React.useState(new Date());
     const [company, setCompany] = React.useState("");
@@ -16,11 +19,12 @@ export default function NewTask() {
     const [address, setAddress] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [notes, setNotes] = React.useState("");
-    const [fileUpload, setFileUpload] = React.useState("");
-    const [status, setStatus] = React.useState(3);
+    const [fileUpload1, setFileUpload1] = React.useState("");
+    const [fileUpload2, setFileUpload2] = React.useState("");
     const formSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData();
+        formData.append("id", id)
         formData.append("start", start)
         formData.append("end", end)
         formData.append("c_name", company)
@@ -29,18 +33,13 @@ export default function NewTask() {
         formData.append("address", address)
         formData.append("email", email)
         formData.append("notes", notes)
-        formData.append("files", fileUpload)
-        formData.append("status", status)
-        PostAny("addTask", formData).then((response) => {
+        formData.append("files1", fileUpload1)
+        formData.append("files2", fileUpload2)
+        formData.append("status", 1)
+        PostAny("editTask", formData).then((response) => {
             responseToast(response.message, response.type)
             if (response.status == 200) {
-                setCompany("")
-                setName("")
-                setPhone("")
-                setAddress("")
-                setEmail("")
-                setNotes("")
-                setFileUpload("")
+                history.push("/staff/progress")
             }
         })
     }
@@ -50,7 +49,7 @@ export default function NewTask() {
                 <div className="bg-pr px-3 py-3 md:px-8 md:py-8 rounded-md">
                     <div className="md:mt-0 md:col-span-2">
                         <h1 className="text-center text-3xl font-medium text-gray-200">
-                            NEW TASK
+                            Add Data
                         </h1>
                         <form onSubmit={(e) => formSubmit(e)} className="mt-8 space-y-6" action="#" method="POST">
                             <div className="rounded-md shadow-sm ">
@@ -179,55 +178,78 @@ export default function NewTask() {
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <div
-                                    className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                                    <div className="space-y-1 text-center">
-                                        <svg
-                                            className="mx-auto h-12 w-12 text-gray-400"
-                                            stroke="currentColor"
-                                            fill="none"
-                                            viewBox="0 0 48 48"
-                                            aria-hidden="true"
-                                        >
-                                            <path
-                                                d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                                strokeWidth={2}
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            />
-                                        </svg>
-                                        <div className="flex text-sm text-gray-600">
-                                            <label
-                                                htmlFor="file-upload"
-                                                className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <div
+                                        className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                        <div className="space-y-1 text-center">
+                                            <svg
+                                                className="mx-auto h-12 w-12 text-gray-400"
+                                                stroke="currentColor"
+                                                fill="none"
+                                                viewBox="0 0 48 48"
+                                                aria-hidden="true"
                                             >
-                                                <span>Upload a file</span>
-                                                <input
-                                                    id="file-upload"
-                                                    name="file-upload"
-                                                    type="file" onChange={(e) => setFileUpload(e.target.files[0])}
-                                                    className="sr-only"
+                                                <path
+                                                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                                    strokeWidth={2}
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
-                                            </label>
+                                            </svg>
+                                            <div className="flex text-sm text-gray-600">
+                                                <label
+                                                    htmlFor="file-upload"
+                                                    className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                                >
+                                                    <span>Upload a file 1</span>
+                                                    <input
+                                                        id="file-upload"
+                                                        name="file-upload"
+                                                        type="file" onChange={(e) => setFileUpload1(e.target.files[0])}
+                                                        className="sr-only"
+                                                    />
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="my-4 grid w-full grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
-                                <label
-                                    htmlFor="notes"
-                                    className="text-gray-300 flex items-center justify-between"
-                                >
-                                    STATUS <BsThreeDotsVertical className="ml-2"/>
-                                </label>
-                                <select onChange={(e) => setStatus(e.target.value)}
-                                        className="browser-default bg-pr text-white custom-select w-48">
-                                    <option value="1">Complete</option>
-                                    <option value="2">Hold</option>
-                                    <option selected value="3">Progress</option>
-                                    <option value="4">Archive</option>
-                                </select>
+                                <div className="col-md-6">
+
+                                    <div
+                                        className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                        <div className="space-y-1 text-center">
+                                            <svg
+                                                className="mx-auto h-12 w-12 text-gray-400"
+                                                stroke="currentColor"
+                                                fill="none"
+                                                viewBox="0 0 48 48"
+                                                aria-hidden="true"
+                                            >
+                                                <path
+                                                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                                    strokeWidth={2}
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                />
+                                            </svg>
+                                            <div className="flex text-sm text-gray-600">
+                                                <label
+                                                    htmlFor="file-upload"
+                                                    className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                                >
+                                                    <span>Upload a file 2</span>
+                                                    <input
+                                                        id="file-upload"
+                                                        name="file-upload"
+                                                        type="file" onChange={(e) => setFileUpload2(e.target.files[0])}
+                                                        className="sr-only"
+                                                    />
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <button
@@ -239,7 +261,7 @@ export default function NewTask() {
                                             aria-hidden="true"
                                         />
                                       </span>
-                                    SAVE
+                                    Complete
                                 </button>
                             </div>
                         </form>

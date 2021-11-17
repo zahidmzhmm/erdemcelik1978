@@ -1,7 +1,6 @@
 import React, {createContext} from "react";
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import Login from "./components/auth/Login";
-import SendModal from "./components/pages/SendModal";
 import Dashboard from "./components/pages/Dashboard";
 import 'react-toastify/dist/ReactToastify.css';
 import Private from "./components/Private";
@@ -13,16 +12,19 @@ import NewTask from "./components/pages/NewTask";
 import Progress from "./components/pages/Progress";
 import Logout from "./components/auth/Logout";
 import Users from "./components/pages/Users";
+import Delete from "./components/pages/Delete";
+import StaffPrivate from "./components/StaffPrivate";
+import AddData from "./components/staff/AddData";
 
 export const MainWrapper = createContext();
 
+
 function App() {
-    const [modalShow, setModalShow] = React.useState(false);
+    let data;
     return (
-        <MainWrapper.Provider value={{modalShow, setModalShow}}>
+        <MainWrapper.Provider value={data}>
             <div className="bg-bg overflow-x-hidden">
                 <Router>
-                    <SendModal/>
                     <Switch>
                         <Route exact path="/">
                             <Redirect to="/login"/>
@@ -42,8 +44,14 @@ function App() {
                         <Private exact path="/progress">
                             <Progress/>
                         </Private>
-                        <Private exact path="/edit/:id">
-                            <Edit/>
+                        <StaffPrivate exact path="/staff/progress">
+                            <Progress/>
+                        </StaffPrivate>
+                        <StaffPrivate exact path="/staff/task/addData/:id">
+                            <AddData/>
+                        </StaffPrivate>
+                        <Private exact path="/delete/:id">
+                            <Delete page={'archive'}/>
                         </Private>
                         <Private exact path="/hold">
                             <Hold/>

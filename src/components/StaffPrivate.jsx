@@ -1,14 +1,12 @@
 import React, {useState} from 'react';
 import {ToastContainer} from "react-toastify";
 import Sidebar from "./layout/Sidebar";
-import {Redirect, Route} from "react-router-dom";
 import Topbar from "./layout/Topbar";
-import "./pages/dashboard.css";
+import {Redirect, Route} from "react-router-dom";
 import {GetAny} from "../main";
+import {UserDataContext} from "./Private";
 
-export const UserDataContext = React.createContext();
-
-const Private = ({children, ...rest}) => {
+const StaffPrivate = ({children, ...rest}) => {
     const [toggle, setToggle] = useState(false);
     const localData = localStorage.getItem('@accessUser');
     const [userData, setUserData] = React.useState(false);
@@ -49,4 +47,4 @@ const Private = ({children, ...rest}) => {
     }
 };
 
-export default Private;
+export default StaffPrivate;

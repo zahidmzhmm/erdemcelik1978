@@ -1,8 +1,10 @@
 import React from "react";
 import cl from '../../images/cl.png';
 import {GetAny} from "../../main";
+import {UserDataContext} from "../Private";
 
 const Dashboard = () => {
+    const userData = React.useContext(UserDataContext);
     const [dashboardData, setDashboardData] = React.useState(false);
     React.useEffect(() => {
         if (dashboardData === false) {
@@ -25,6 +27,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                 </div>
+                {userData.role == 'admin' &&
                 <div className="w-full py-5 grid grid-cols-1 lg:grid-cols-3 gap-5 items-center">
                     <div className="bg-sr text-gray-200 text-center py-6 rounded-md">
                         <h1 className="text-2xl font-semibold">NEW TASK</h1>
@@ -39,6 +42,7 @@ const Dashboard = () => {
                         <h1 className="text-7xl font-bold">{dashboardData.doneTask}</h1>
                     </div>
                 </div>
+                }
             </>
         );
     } else {

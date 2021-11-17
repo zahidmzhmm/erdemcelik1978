@@ -1,12 +1,10 @@
 import {MDBDataTable} from "mdbreact";
 import React, {useContext} from "react";
 import "./progress.css";
-import {MainWrapper} from "../../App";
 import {GetAny} from "../../main";
 import {Link} from "react-router-dom";
 
 const Complete = () => {
-    const {setModalShow} = useContext(MainWrapper);
     const [completeData, setCompleteData] = React.useState(false);
     React.useEffect(() => {
         if (completeData === false) {

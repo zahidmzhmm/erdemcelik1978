@@ -1,12 +1,11 @@
 import {MDBDataTable} from "mdbreact";
-import React, {useContext} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
-import {MainWrapper} from "../../App";
 import "./progress.css";
 import {GetAny} from "../../main";
+import SendHold from "./SendHold";
 
 const Hold = () => {
-    const {setModalShow} = useContext(MainWrapper);
     const [holdData, setHoldData] = React.useState(false);
     React.useEffect(() => {
         if (holdData === false) {
@@ -65,12 +64,7 @@ const Hold = () => {
                         email: data.email,
                         action: (
                             <>
-                                <button
-                                    onClick={() => setModalShow(true)}
-                                    className="bg-sr text-white px-2 py-1 rounded-md"
-                                >
-                                    Send
-                                </button>
+                                <SendHold data2={data}/>
                                 <Link to={"/edit/" + data.id}>
                                     <button className="bg-sr ml-2 text-white px-2 py-1 rounded-md">
                                         Edit

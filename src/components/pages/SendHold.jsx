@@ -10,7 +10,7 @@ function classNames(...classes) {
 }
 
 
-const SendModal = ({data2}) => {
+const SendHold = ({data2}) => {
     const [modalShow, setModalShow] = React.useState(false);
     const [data, setData] = useState(false);
     const [selected, setSelected] = useState(0);
@@ -29,6 +29,7 @@ const SendModal = ({data2}) => {
     const formSubmit = (e) => {
         e.preventDefault()
         const formData = new FormData();
+        formData.append("id", selected.id);
         formData.append("staff_id", selected.id);
         formData.append("task_id", data2.id);
         formData.append("role", option);
@@ -43,7 +44,7 @@ const SendModal = ({data2}) => {
                 <button
                     onClick={(e) => setModalShow(!modalShow)}
                     className="bg-sr text-white px-2 py-1 rounded-md">
-                    Send
+                    Send Another
                 </button>
                 <Modal
                     show={modalShow} onHide={handleClose}
@@ -161,4 +162,4 @@ const SendModal = ({data2}) => {
     }
 };
 
-export default SendModal;
+export default SendHold;

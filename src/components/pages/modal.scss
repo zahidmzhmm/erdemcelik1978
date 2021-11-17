@@ -1,0 +1,29 @@
+.checkboxGroup {
+  color: white;
+  text-align: center;
+
+  .form-group {
+    display: inline-block;
+
+    label {
+
+      background: #070707;
+      padding-bottom: 0;
+      padding-top: .5rem;
+      padding-bottom: .5rem;
+      cursor: pointer;
+      padding-right: 1rem;
+      padding-left: 1rem;
+      margin-right: .5rem;
+      border-radius: .5rem;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    &.active {
+      label {
+        background: #007bff;
+      }
+    }
+  }
+}
