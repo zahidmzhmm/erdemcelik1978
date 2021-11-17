@@ -12,7 +12,6 @@ const Dashboard = () => {
         }
     })
     if (dashboardData !== false) {
-        console.log(dashboardData)
         return (
             <>
                 <div className="rounded-md overflow-hidden">
