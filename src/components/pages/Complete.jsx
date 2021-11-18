@@ -1,9 +1,10 @@
-import {MDBDataTable} from "mdbreact";
-import React, {useContext} from "react";
+import { MDBDataTable } from "mdbreact";
+import React from "react";
+import { FaDownload } from 'react-icons/fa';
+import { MdModeEdit } from 'react-icons/md';
+import { Link } from "react-router-dom";
+import { GetAny } from "../../main";
 import "./progress.css";
-import {GetAny} from "../../main";
-import {Link} from "react-router-dom";
-
 const Complete = () => {
     const [completeData, setCompleteData] = React.useState(false);
     React.useEffect(() => {
@@ -19,32 +20,27 @@ const Complete = () => {
                 {
                     label: "Company Name",
                     field: "company",
-
                     width: 200,
                 },
                 {
                     label: "Name",
                     field: "name",
-
                     width: 200,
                 },
 
                 {
                     label: "Phone",
                     field: "phone",
-
                     width: 200,
                 },
                 {
                     label: "Address",
                     field: "address",
-
                     width: 200,
                 },
                 {
                     label: "Email",
                     field: "email",
-
                     width: 200,
                 },
                 {
@@ -64,13 +60,18 @@ const Complete = () => {
                     address: data.address,
                     email: data.email,
                     action: (
-                        <>
+                        <div className="flex items-center">
                             <Link to={"/download/" + data.id}>
-                                <button className="bg-sr ml-2 text-white px-2 py-1 rounded-md">
-                                    Download
+                                <button className="bg-sr ml-2 text-white px-2 py-2 rounded-md">
+                                   <FaDownload />
                                 </button>
                             </Link>
-                        </>
+                            <Link to={"/edit/" + data.id}>
+                                    <button className="bg-sr ml-2 text-white px-2 py-2 rounded-md">
+                                      <MdModeEdit/>
+                                    </button>
+                                </Link>
+                        </div>
                     )
                 })
             )
@@ -78,7 +79,7 @@ const Complete = () => {
 
         return (
             <>
-                <div className="bg-pr text-white p-4 rounded-md">
+                <div className="bg-pr text-white p-4 rounded-md ">
                     <h1 className="text-white font-medium text-center text-3xl">COMPLETED</h1>
                     <MDBDataTable responsiveMd hover bordered data={data}/>
                 </div>

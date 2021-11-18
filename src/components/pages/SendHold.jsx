@@ -1,8 +1,8 @@
-import {Listbox, Transition} from "@headlessui/react";
-import {CheckIcon, SelectorIcon} from "@heroicons/react/solid";
-import React, {Fragment, useState} from "react";
-import {Modal, Button} from "react-bootstrap"
-import {GetAny, PostAny, responseToast} from "../../main";
+import { Listbox, Transition } from "@headlessui/react";
+import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import React, { Fragment, useState } from "react";
+import { Button, Modal } from "react-bootstrap";
+import { GetAny, PostAny, responseToast } from "../../main";
 import "./modal.scss";
 
 function classNames(...classes) {
@@ -44,7 +44,7 @@ const SendHold = ({data2}) => {
                 <button
                     onClick={(e) => setModalShow(!modalShow)}
                     className="bg-sr text-white px-2 py-1 rounded-md">
-                    Send Another
+                    Send
                 </button>
                 <Modal
                     show={modalShow} onHide={handleClose}

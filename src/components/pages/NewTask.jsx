@@ -3,9 +3,9 @@ import DateTimePicker from "@mui/lab/DateTimePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import TextField from "@mui/material/TextField";
 import * as React from "react";
-import {BsThreeDotsVertical} from "react-icons/bs";
-import {IoCheckmarkDoneCircle} from "react-icons/io5";
-import {PostAny, responseToast} from "../../main";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { IoCheckmarkDoneCircle } from "react-icons/io5";
+import { PostAny, responseToast } from "../../main";
 
 export default function NewTask() {
     const [start, setStart] = React.useState(new Date());
@@ -18,6 +18,7 @@ export default function NewTask() {
     const [notes, setNotes] = React.useState("");
     const [fileUpload, setFileUpload] = React.useState("");
     const [status, setStatus] = React.useState(3);
+    const [whatsapp, setWhatsapp] = React.useState("");
     const formSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -31,6 +32,7 @@ export default function NewTask() {
         formData.append("notes", notes)
         formData.append("files", fileUpload)
         formData.append("status", status)
+        formData.append("whatsapp", whatsapp)
         PostAny("addTask", formData).then((response) => {
             responseToast(response.message, response.type)
             if (response.status == 200) {
@@ -52,13 +54,28 @@ export default function NewTask() {
                         <h1 className="text-center text-3xl font-medium text-gray-200">
                             NEW TASK
                         </h1>
-                        <form onSubmit={(e) => formSubmit(e)} className="mt-8 space-y-6" action="#" method="POST">
+                        <form onSubmit={(e) => formSubmit(e)} className="mt-8 space-y-3" action="#" method="POST">
+                        <div className="my-1 grid w-full grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
+                                <label
+                                    htmlFor="notes"
+                                    className="text-gray-300 flex items-center justify-between"
+                                >
+                                    STATUS <BsThreeDotsVertical className="ml-2"/>
+                                </label>
+                                <select onChange={(e) => setStatus(e.target.value)}
+                                        className="browser-default bg-pr text-white custom-select w-48">
+                                    <option value="1">Complete</option>
+                                    <option value="2">Hold</option>
+                                    <option selected value="3">Progress</option>
+                                    <option value="4">Archive</option>
+                                </select>
+                            </div>
                             <div className="rounded-md shadow-sm ">
-                                <div className="my-4 grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
+                                <div className="my-1 grid grid-cols-1 md:grid-cols-5 md:gap-5">
                                     <label
                                         htmlFor="email-address"
                                         className="text-gray-300 flex items-center justify-between">
-                                        COMPANY NAME <BsThreeDotsVertical className="ml-2"/>
+                                        COMPANY<BsThreeDotsVertical className="ml-2"/>
                                     </label>
                                     <input
                                         id="company-name"
@@ -69,7 +86,7 @@ export default function NewTask() {
                                         placeholder="Your Company"
                                     />
                                 </div>
-                                <div className="my-4 grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
+                                <div className="mb-1 grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
                                     <label
                                         htmlFor="email-address"
                                         className="text-gray-300 flex items-center justify-between">
@@ -84,7 +101,7 @@ export default function NewTask() {
                                         placeholder="Jone Doe"
                                     />
                                 </div>
-                                <div className="my-4 grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
+                                <div className="my-1 grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
                                     <label
                                         htmlFor="email-address"
                                         className="text-gray-300 flex items-center justify-between">
@@ -99,7 +116,7 @@ export default function NewTask() {
                                         placeholder="+001122334455"
                                     />
                                 </div>
-                                <div className="my-4 grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
+                                <div className="my-1 grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
                                     <label
                                         htmlFor="email-address"
                                         className="text-gray-300 flex items-center justify-between">
@@ -114,7 +131,7 @@ export default function NewTask() {
                                         placeholder="Your Address"
                                     />
                                 </div>
-                                <div className="my-4 grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
+                                <div className="my-1 grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
                                     <label
                                         htmlFor="email-address"
                                         className="text-gray-300 flex items-center justify-between">
@@ -129,9 +146,24 @@ export default function NewTask() {
                                         placeholder="email@email.com"
                                     />
                                 </div>
+                                <div className="my-1 grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
+                                    <label  
+                                        htmlFor="email-address"
+                                        className="text-gray-300 flex items-center justify-between">
+                                        WHATSAPP <BsThreeDotsVertical className="ml-2"/>
+                                    </label>
+                                    <input
+                                        id="whatsapp"
+                                        name="whatsapp" value={whatsapp}
+                                        type="text" onChange={(e) => setWhatsapp(e.target.value)}
+                                        required
+                                        className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                        placeholder="whatsapp number"
+                                    />
+                                </div>
                             </div>
 
-                            <div className="my-4 grid w-full grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
+                            <div className="my-1 grid w-full grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
                                 <label
                                     htmlFor="notes"
                                     className="text-gray-300 flex items-center justify-between">
@@ -142,15 +174,19 @@ export default function NewTask() {
                                     id="notes" value={notes}
                                     cols="30" onChange={(e) => setNotes(e.target.value)}
                                     className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                    rows="10"
+                                    rows="3"
                                 />
                             </div>
                             <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-5 rounded-md">
-                                <div className="flex items-center justify-center flex-col gap-2">
-                                    <p className="text-gray-300">START DATE</p>
+                                <div className="flex items-center justify-center gap-2">
+                                    <p className="text-gray-300 flex items-center">START DATE <BsThreeDotsVertical className="ml-2" /></p>
                                     <div className="bg-white rounded-md">
                                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                                             <DateTimePicker
+                                             ampm={false}
+                                             ampmInClock={false}
+                                             inputFormat="dd/MM/yyyy/ h:m"
+                                             
                                                 renderInput={(props) => (
                                                     <TextField color="primary" {...props} />
                                                 )}
@@ -162,26 +198,11 @@ export default function NewTask() {
                                         </LocalizationProvider>
                                     </div>
                                 </div>
-                                <div className="flex items-center justify-center flex-col gap-2">
-                                    <p className="text-gray-300">END DATE</p>
-                                    <div className="bg-white rounded-md">
-                                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                            <DateTimePicker
-                                                renderInput={(props) => (
-                                                    <TextField color="primary" {...props} />
-                                                )}
-                                                value={end}
-                                                onChange={(end) => {
-                                                    setEnd(end);
-                                                }}
-                                            />
-                                        </LocalizationProvider>
-                                    </div>
-                                </div>
+                          
                             </div>
                             <div>
                                 <div
-                                    className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                    className="mt-1 flex justify-center px-3 pt-3 pb-1 border-2 border-gray-300 border-dashed rounded-md">
                                     <div className="space-y-1 text-center">
                                         <svg
                                             className="mx-auto h-12 w-12 text-gray-400"
@@ -214,21 +235,7 @@ export default function NewTask() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="my-4 grid w-full grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
-                                <label
-                                    htmlFor="notes"
-                                    className="text-gray-300 flex items-center justify-between"
-                                >
-                                    STATUS <BsThreeDotsVertical className="ml-2"/>
-                                </label>
-                                <select onChange={(e) => setStatus(e.target.value)}
-                                        className="browser-default bg-pr text-white custom-select w-48">
-                                    <option value="1">Complete</option>
-                                    <option value="2">Hold</option>
-                                    <option selected value="3">Progress</option>
-                                    <option value="4">Archive</option>
-                                </select>
-                            </div>
+                          
                             <div>
                                 <button
                                     type="submit"

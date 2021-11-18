@@ -1,6 +1,6 @@
 // export const mainURI = "https://crownedtutors.com";
 import axios from "axios";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 
 export const mainURI = "https://erdemcelik.fazgroupltd.com";
 export const apiURI = mainURI + "/api/";
@@ -15,6 +15,7 @@ export const PostAny = async (page, data) => {
         method: "post",
         data: data
     }).then((response) => {
+        
         return response.data
     });
 }

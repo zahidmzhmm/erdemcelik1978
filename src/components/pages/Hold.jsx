@@ -1,8 +1,8 @@
-import {MDBDataTable} from "mdbreact";
+import { MDBDataTable } from "mdbreact";
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { GetAny } from "../../main";
 import "./progress.css";
-import {GetAny} from "../../main";
 import SendHold from "./SendHold";
 
 const Hold = () => {
@@ -63,14 +63,14 @@ const Hold = () => {
                         address: data.address,
                         email: data.email,
                         action: (
-                            <>
+                            <div className="flex items-center">
                                 <SendHold data2={data}/>
                                 <Link to={"/edit/" + data.id}>
                                     <button className="bg-sr ml-2 text-white px-2 py-1 rounded-md">
                                         Edit
                                     </button>
                                 </Link>
-                            </>
+                            </div>
                         )
                     })
                 )

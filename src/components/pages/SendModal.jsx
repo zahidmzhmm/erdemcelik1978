@@ -1,8 +1,8 @@
-import {Listbox, Transition} from "@headlessui/react";
-import {CheckIcon, SelectorIcon} from "@heroicons/react/solid";
-import React, {Fragment, useState} from "react";
-import {Modal, Button} from "react-bootstrap"
-import {GetAny, PostAny, responseToast} from "../../main";
+import { Listbox, Transition } from "@headlessui/react";
+import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import React, { Fragment, useState } from "react";
+import { Button, Modal } from "react-bootstrap";
+import { GetAny, PostAny, responseToast } from "../../main";
 import "./modal.scss";
 
 function classNames(...classes) {
@@ -28,11 +28,13 @@ const SendModal = ({data2}) => {
     })
     const formSubmit = (e) => {
         e.preventDefault()
+        console.log(data2)
         const formData = new FormData();
         formData.append("staff_id", selected.id);
         formData.append("task_id", data2.id);
         formData.append("role", option);
         PostAny("sendAlert", formData).then((response) => {
+            console.log(response);
             responseToast(response.message, response.type)
             setModalShow(false)
         })

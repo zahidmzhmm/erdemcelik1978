@@ -1,12 +1,12 @@
 import React from "react";
-import {AiOutlineClose, AiOutlineHome, AiOutlineRight} from "react-icons/ai";
-import {BiTask, BiUserCircle} from "react-icons/bi";
-import {FiArchive, FiSettings} from "react-icons/fi";
-import {GiProgression, GiRobotGrab} from "react-icons/gi";
-import {IoCheckmarkDone} from "react-icons/io5";
-import {NavLink} from "react-router-dom";
+import { AiOutlineClose, AiOutlineHome, AiOutlineRight } from "react-icons/ai";
+import { BiTask, BiUserCircle } from "react-icons/bi";
+import { FiArchive } from "react-icons/fi";
+import { GiProgression, GiRobotGrab } from "react-icons/gi";
+import { IoCheckmarkDone } from "react-icons/io5";
+import { NavLink } from "react-router-dom";
+import { UserDataContext } from "../Private";
 import "./sidebar.css";
-import {UserDataContext} from "../Private";
 
 const Sidebar = ({toggle, setToggle}) => {
     const userData = React.useContext(UserDataContext);
@@ -131,19 +131,6 @@ const Sidebar = ({toggle, setToggle}) => {
                                     <AiOutlineRight/>
                                 </div>
                             </NavLink>
-                            <NavLink
-                                to="/settings"
-                                className="w-full px-3 py-2 rounded-md hover:bg-indigo-500 text-center text-gray-300 text-sm"
-                                activeClassName="bg-sr text-white"
-                            >
-                                <div className="flex animate items-center justify-between text-sm text-gray-300 ">
-                                    <div className="flex items-center ">
-                                        <FiSettings className=" mr-3 w-4 h-4 text-sm"/>{" "}
-                                        <h6 className="pt-1 font-medium">SETTINGS</h6>
-                                    </div>
-                                    <AiOutlineRight/>
-                                </div>
-                            </NavLink>
                         </div>
                     </>
                     }
@@ -177,21 +164,7 @@ const Sidebar = ({toggle, setToggle}) => {
                                 </div>
                             </NavLink>
                         </div>
-                        <div className="flex items-center flex-col w-full pt-60 gap-3">
-                            <NavLink
-                                to="/settings"
-                                className="w-full px-3 py-2 rounded-md hover:bg-indigo-500 text-center text-gray-300 text-sm"
-                                activeClassName="bg-sr text-white"
-                            >
-                                <div className="flex animate items-center justify-between text-sm text-gray-300 ">
-                                    <div className="flex items-center ">
-                                        <FiSettings className=" mr-3 w-4 h-4 text-sm"/>{" "}
-                                        <h6 className="pt-1 font-medium">SETTINGS</h6>
-                                    </div>
-                                    <AiOutlineRight/>
-                                </div>
-                            </NavLink>
-                        </div>
+                     
                     </>
                     }
 
