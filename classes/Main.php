@@ -121,11 +121,12 @@ class Main
 
     public function ntwc()
     {
-        $newTask = $this->db->num_rows("select id from tasks where status=3");
+        $progress = $this->db->num_rows("select id from tasks where status=3");
         $waitTask = $this->db->num_rows("select id from tasks where status=2");
         $doneTask = $this->db->num_rows("select id from tasks where status=1");
+        $archive = $this->db->num_rows("select id from tasks where status=4");
         $this->core->response("Success", "success", 200,
-            ["newTask" => $newTask, "waitTask" => $waitTask, "doneTask" => $doneTask]
+            ["progress" => $progress, "waitTask" => $waitTask, "doneTask" => $doneTask, "archive" => $archive]
         );
     }
 }
