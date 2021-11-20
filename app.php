@@ -55,6 +55,10 @@ switch ($url) {
     case "alerts":
         $main->alerts();
         break;
+    case "download":
+        $id = $main->select("id");
+        $main->download($id);
+        break;
     default:
         $core->response("Something went wrong");
 }

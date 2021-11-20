@@ -18,8 +18,8 @@ class Task
 
     public function add($data)
     {
-        $start = $this->db->real_scape_str($data['start']);
-        $end = $this->db->real_scape_str($data['end']);
+        $start = strtotime($data['start']);
+        $end = strtotime($data['end']);
         $c_name = $this->db->real_scape_str($data['c_name']);
         $name = $this->db->real_scape_str($data['name']);
         $phone = $this->db->real_scape_str($data['phone']);
