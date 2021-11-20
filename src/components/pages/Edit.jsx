@@ -22,6 +22,7 @@ export default function Edit() {
         setEmail(response.data.email);
         setNotes(response.data.notes);
         setStatus(response.data.status);
+        setWhatsapp(response.data.whatsapp)
       });
     }
   });

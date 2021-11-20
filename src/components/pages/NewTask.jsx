@@ -19,7 +19,7 @@ export default function NewTask() {
   const [fileUpload, setFileUpload] = React.useState("");
   const [status, setStatus] = React.useState(3);
   const [whatsapp, setWhatsapp] = React.useState("");
-const [filename, setFilename] = useState("Een bestand uploaden")
+  const [filename, setFilename] = useState("Een bestand uploaden")
   
   const formSubmit = (e) => {
     e.preventDefault();
@@ -45,6 +45,7 @@ const [filename, setFilename] = useState("Een bestand uploaden")
         setEmail("");
         setNotes("");
         setFileUpload("");
+        setWhatsapp("")
       }
     });
   };
