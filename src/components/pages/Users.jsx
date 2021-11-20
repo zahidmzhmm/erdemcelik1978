@@ -17,7 +17,7 @@ const Users = () => {
     const data = {
       columns: [
         {
-          label: "Name",
+          label: "Naam",
           field: "name",
           width: 200,
         },
@@ -27,7 +27,7 @@ const Users = () => {
           width: 200,
         },
         {
-          label: "Phone",
+          label: "Telefoon",
           field: "phone",
           width: 200,
         },
@@ -37,7 +37,7 @@ const Users = () => {
           width: 200,
         },
         {
-          label: "Role",
+          label: "Rol",
           field: "role",
           width: 200,
         },
@@ -60,13 +60,13 @@ const Users = () => {
         <AddUserModal modalShow={modalShow} setModalShow={setModalShow} />
         <div className="bg-pr text-white p-4 rounded-md">
           <h1 className="text-white font-medium text-center text-3xl">
-            COMPLETED
+          VOLTOOID
           </h1>
           <button
             onClick={() => setModalShow(true)}
             className="px-2 py-2 bg-sr text-white rounded-md"
           >
-            Add User
+           Voeg gebruiker toe
           </button>
           <MDBDataTable responsiveMd hover bordered data={data} />
         </div>
