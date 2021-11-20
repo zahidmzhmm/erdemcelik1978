@@ -6,13 +6,13 @@ import AddUserModal from "./AddUserModal";
 const Users = () => {
   const [usersData, setUsersData] = useState(false);
   const [modalShow, setModalShow] = useState(false);
+  const [adduser, setAdduser] = useState(false);
   React.useEffect(() => {
-    if (usersData === false) {
-      GetAny("users").then((response) => {
-        setUsersData(response.data);
-      });
-    }
-  });
+    GetAny("users").then((response) => {
+      setUsersData(response.data);
+      setAdduser(false);
+    });
+  }, [adduser]);
   if (usersData !== false) {
     const data = {
       columns: [
@@ -54,19 +54,23 @@ const Users = () => {
           }
       ),
     };
-   
+
     return (
       <>
-        <AddUserModal modalShow={modalShow} setModalShow={setModalShow} />
+        <AddUserModal
+          modalShow={modalShow}
+          setAdduser={setAdduser}
+          setModalShow={setModalShow}
+        />
         <div className="bg-pr text-white p-4 rounded-md">
           <h1 className="text-white font-medium text-center text-3xl">
-          VOLTOOID
+            VOLTOOID
           </h1>
           <button
             onClick={() => setModalShow(true)}
             className="px-2 py-2 bg-sr text-white rounded-md"
           >
-           Voeg gebruiker toe
+            Voeg gebruiker toe
           </button>
           <MDBDataTable responsiveMd hover bordered data={data} />
         </div>
@@ -78,3 +82,6 @@ const Users = () => {
 };
 
 export default Users;
+
+// admin email = admin@admin.com
+// passoword = admin12123

@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {ToastContainer} from "react-toastify";
+import React, { useState } from 'react';
+import { Redirect, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { GetAny } from "../main";
 import Sidebar from "./layout/Sidebar";
 import Topbar from "./layout/Topbar";
-import {Redirect, Route} from "react-router-dom";
-import {GetAny} from "../main";
-import {UserDataContext} from "./Private";
+import { UserDataContext } from "./Private";
 
 const StaffPrivate = ({children, ...rest}) => {
     const [toggle, setToggle] = useState(false);
@@ -33,7 +33,7 @@ const StaffPrivate = ({children, ...rest}) => {
                                     : "col-span-5 min-h-screen"
                             }>
                                 <Topbar setToggle={setToggle} toggle={toggle}/>
-                                <div className="mx-5">{<Route {...rest} render={() => (children)}/>}</div>
+                                <div className="mx-2 lg:mx-5">{<Route {...rest} render={() => (children)}/>}</div>
                             </div>
                         </div>
                     </UserDataContext.Provider>

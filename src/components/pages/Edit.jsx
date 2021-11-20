@@ -37,7 +37,7 @@ export default function Edit() {
   const [status, setStatus] = React.useState("");
   const [whatsapp, setWhatsapp] = React.useState("");
   const [filename, setFilename] = React.useState("Een bestand uploaden");
-
+  
   const formSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -141,7 +141,7 @@ export default function Edit() {
                       value={phone}
                       type="number"
                       onChange={(e) => setPhone(e.target.value)}
-                      required
+                    
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="+001122334455"
                     />
@@ -159,7 +159,7 @@ export default function Edit() {
                       value={address}
                       type="text"
                       onChange={(e) => setAddress(e.target.value)}
-                      required
+                      
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Jouw adres"
                     />
@@ -177,7 +177,7 @@ export default function Edit() {
                       value={email}
                       type="email"
                       onChange={(e) => setEmail(e.target.value)}
-                      required
+                    
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="email@email.com"
                     />
@@ -195,7 +195,6 @@ export default function Edit() {
                       value={whatsapp}
                       type="text"
                       onChange={(e) => setWhatsapp(e.target.value)}
-                      required
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="whatsapp number"
                     />

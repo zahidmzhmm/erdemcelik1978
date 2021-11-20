@@ -62,7 +62,7 @@ export default function AddData() {
   if (data !== false) {
     return (
       <>
-        <div className="overflow-x-hidden">
+        <div className="overflow-x-hidden">    
           <div className="bg-pr px-3 py-3 md:px-8 md:py-8 rounded-md">
             <div className="md:mt-0 md:col-span-2">
               <h1 className="text-center text-3xl font-medium text-gray-200">
@@ -125,7 +125,7 @@ export default function AddData() {
                       value={phone}
                       type="number"
                       onChange={(e) => setPhone(e.target.value)}
-                      required
+                      
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="+001122334455"
                     />
@@ -143,7 +143,7 @@ export default function AddData() {
                       value={address}
                       type="text"
                       onChange={(e) => setAddress(e.target.value)}
-                      required
+                     
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Jouw adres"
                     />
@@ -161,7 +161,7 @@ export default function AddData() {
                       value={email}
                       type="email"
                       onChange={(e) => setEmail(e.target.value)}
-                      required
+                   
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="email@email.com"
                     />
@@ -179,7 +179,7 @@ export default function AddData() {
                       value={whatsapp}
                       type="text"
                       onChange={(e) => setWhatsapp(e.target.value)}
-                      required
+                    
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="whatsapp-nummer"
                     />

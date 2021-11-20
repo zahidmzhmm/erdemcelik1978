@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import { PostAny, responseToast } from "../../main";
-const AddUserModal = ({ modalShow, setModalShow }) => {
+const AddUserModal = ({ modalShow, setModalShow, setAdduser }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
@@ -23,11 +23,11 @@ const AddUserModal = ({ modalShow, setModalShow }) => {
     PostAny("addUser", formData).then((response) => {
       responseToast(response.message, response.type);
       if (response.status == 200) {
+        setAdduser(true)
         setName("");
         setPhone("");
         setEmail("");
         setRole("");
-
         setModalShow(false);
       }
     });
@@ -99,7 +99,7 @@ const AddUserModal = ({ modalShow, setModalShow }) => {
                   value={pass}
                   type="password"
                   onChange={(e) => setPass(e.target.value)}
-                  required
+                
                   className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="personeelswachtwoord"
                 />
@@ -117,7 +117,7 @@ const AddUserModal = ({ modalShow, setModalShow }) => {
                   value={phone}
                   type="number"
                   onChange={(e) => setPhone(e.target.value)}
-                  required
+                 
                   className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="+001122334455"
                 />
@@ -136,7 +136,7 @@ const AddUserModal = ({ modalShow, setModalShow }) => {
                   value={whatsapp}
                   type="text"
                   onChange={(e) => setWhatsapp(e.target.value)}
-                  required
+                 
                   className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Whatsapp-nummer"
                 />

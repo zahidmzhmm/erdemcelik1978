@@ -11,7 +11,7 @@ function classNames(...classes) {
 
 export default function Topbar({setToggle, toggle}) {
     return (
-        <div className="m-5">
+        <div className="m-2 m-lg-5">
             <Disclosure as="nav" className="bg-pr rounded-md">
                 {({open}) => (
                     <>

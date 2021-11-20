@@ -132,7 +132,7 @@ const [filename, setFilename] = useState("Een bestand uploaden")
                     value={phone}
                     type="number"
                     onChange={(e) => setPhone(e.target.value)}
-                    required
+                    
                     className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                     placeholder="+001122334455"
                   />
@@ -150,7 +150,7 @@ const [filename, setFilename] = useState("Een bestand uploaden")
                     value={address}
                     type="text"
                     onChange={(e) => setAddress(e.target.value)}
-                    required
+                   
                     className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                     placeholder="
                                         Jouw adres"
@@ -169,7 +169,7 @@ const [filename, setFilename] = useState("Een bestand uploaden")
                     value={email}
                     type="email"
                     onChange={(e) => setEmail(e.target.value)}
-                    required
+                   
                     className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                     placeholder="email@email.com"
                   />
@@ -187,7 +187,7 @@ const [filename, setFilename] = useState("Een bestand uploaden")
                     value={whatsapp}
                     type="text"
                     onChange={(e) => setWhatsapp(e.target.value)}
-                    required
+                   
                     className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                     placeholder="
                     whatsapp-nummer"
