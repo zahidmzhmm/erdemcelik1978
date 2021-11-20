@@ -4,7 +4,6 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import { PostAny, responseToast } from "../../main";
 const AddUserModal = ({ modalShow, setModalShow }) => {
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
@@ -28,8 +27,8 @@ const AddUserModal = ({ modalShow, setModalShow }) => {
         setPhone("");
         setEmail("");
         setRole("");
-       
-        setModalShow(false)
+
+        setModalShow(false);
       }
     });
   };
@@ -55,7 +54,7 @@ const AddUserModal = ({ modalShow, setModalShow }) => {
                   htmlFor="email-address"
                   className="text-gray-300 flex items-center justify-between"
                 >
-                  STUFF NAME <BsThreeDotsVertical className="ml-2" />
+                  DINGEN NAAM <BsThreeDotsVertical className="ml-2" />
                 </label>
                 <input
                   id="name"
@@ -73,7 +72,7 @@ const AddUserModal = ({ modalShow, setModalShow }) => {
                   htmlFor="email-address"
                   className="text-gray-300 flex items-center justify-between"
                 >
-                  EMAIL <BsThreeDotsVertical className="ml-2" />
+                  E-MAIL <BsThreeDotsVertical className="ml-2" />
                 </label>
                 <input
                   id="email"
@@ -91,7 +90,8 @@ const AddUserModal = ({ modalShow, setModalShow }) => {
                   htmlFor="email-address"
                   className="text-gray-300 flex items-center justify-between"
                 >
-                  PASSWORD <BsThreeDotsVertical className="ml-2" />
+                  WACHTWOORD
+                  <BsThreeDotsVertical className="ml-2" />
                 </label>
                 <input
                   id="password"
@@ -101,7 +101,7 @@ const AddUserModal = ({ modalShow, setModalShow }) => {
                   onChange={(e) => setPass(e.target.value)}
                   required
                   className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="staff password"
+                  placeholder="personeelswachtwoord"
                 />
               </div>
               <div className="my-3 grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
@@ -109,7 +109,7 @@ const AddUserModal = ({ modalShow, setModalShow }) => {
                   htmlFor="email-address"
                   className="text-gray-300 flex items-center justify-between"
                 >
-                  PHONE <BsThreeDotsVertical className="ml-2" />
+                  TELEFOON <BsThreeDotsVertical className="ml-2" />
                 </label>
                 <input
                   id="phone"
@@ -128,7 +128,7 @@ const AddUserModal = ({ modalShow, setModalShow }) => {
                   htmlFor="email-address"
                   className="text-gray-300 flex items-center justify-between"
                 >
-                  WHATSAPP <BsThreeDotsVertical className="ml-2" />
+                  WHATAPP <BsThreeDotsVertical className="ml-2" />
                 </label>
                 <input
                   id="whatsapp"
@@ -138,23 +138,24 @@ const AddUserModal = ({ modalShow, setModalShow }) => {
                   onChange={(e) => setWhatsapp(e.target.value)}
                   required
                   className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Whatsapp Number"
+                  placeholder="Whatsapp-nummer"
                 />
               </div>
               <div className="my-3 grid w-full grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
-                                <label
-                                    htmlFor="notes"
-                                    className="text-gray-300 flex items-center justify-between"
-                                >
-                                     ROLE <BsThreeDotsVertical className="ml-2"/>
-                                </label>
-                                <select onChange={(e) => setRole(e.target.value)}
-                                        className="browser-default bg-pr text-white custom-select w-48">
-                                    <option value="staff">Staff</option>
-                                    <option value="admin">Admin</option>
-                                   
-                                </select>
-                            </div>
+                <label
+                  htmlFor="notes"
+                  className="text-gray-300 flex items-center justify-between"
+                >
+                  ROL <BsThreeDotsVertical className="ml-2" />
+                </label>
+                <select
+                  onChange={(e) => setRole(e.target.value)}
+                  className="browser-default bg-pr text-white custom-select w-48"
+                >
+                  <option value="staff">Personeel</option>
+                  <option value="admin">beheerder</option>
+                </select>
+              </div>
             </div>
 
             <div>
@@ -168,7 +169,7 @@ const AddUserModal = ({ modalShow, setModalShow }) => {
                     aria-hidden="true"
                   />
                 </span>
-                Add User
+                Voeg gebruiker toe
               </button>
             </div>
           </form>

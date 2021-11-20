@@ -36,6 +36,7 @@ export default function Edit() {
   const [fileUpload, setFileUpload] = React.useState("");
   const [status, setStatus] = React.useState("");
   const [whatsapp, setWhatsapp] = React.useState("");
+  const [filename, setFilename] = React.useState("Een bestand uploaden");
 
   const formSubmit = (e) => {
     e.preventDefault();
@@ -50,7 +51,7 @@ export default function Edit() {
     formData.append("notes", notes);
     formData.append("files", fileUpload);
     formData.append("status", status);
-    formData.append("whatsapp", whatsapp)
+    formData.append("whatsapp", whatsapp);
     formData.append("id", id);
     PostAny("editTask", formData).then((response) =>
       responseToast(response.message, response.type)
@@ -63,7 +64,7 @@ export default function Edit() {
           <div className="bg-pr px-3 py-3 md:px-8 md:py-8 rounded-md">
             <div className="md:mt-0 md:col-span-2">
               <h1 className="text-center text-xl font-medium text-gray-200">
-                EDIT TASK
+              TAAK BEWERKEN
               </h1>
               <form
                 onSubmit={(e) => formSubmit(e)}
@@ -77,18 +78,18 @@ export default function Edit() {
                       htmlFor="notes"
                       className="text-gray-300 flex items-center justify-between"
                     >
-                      STATUS <BsThreeDotsVertical className="ml-2" />
+                      TOESTAND <BsThreeDotsVertical className="ml-2" />
                     </label>
                     <select
                       onChange={(e) => setStatus(e.target.value)}
                       className="browser-default bg-pr text-white custom-select w-48"
                     >
-                      <option value="1">Complete</option>
-                      <option value="2">Hold</option>
+                      <option value="1">Compleet</option>
+                      <option value="2">Uitstel</option>
                       <option selected value="3">
-                        Progress
+                        Voortgang
                       </option>
-                      <option value="4">Archive</option>
+                      <option value="4">Archief</option>
                     </select>
                   </div>
                   <div className="my-1 grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
@@ -96,7 +97,7 @@ export default function Edit() {
                       htmlFor="email-address"
                       className="text-gray-300 flex items-center justify-between"
                     >
-                      COMPANY NAME <BsThreeDotsVertical className="ml-2" />
+                      BEDRIJFSNAAM <BsThreeDotsVertical className="ml-2" />
                     </label>
                     <input
                       id="company-name"
@@ -106,7 +107,7 @@ export default function Edit() {
                       required
                       onChange={(e) => setCompany(e.target.value)}
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                      placeholder="Your Company"
+                      placeholder="Uw onderneming"
                     />
                   </div>
                   <div className="my-1 grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
@@ -114,7 +115,7 @@ export default function Edit() {
                       htmlFor="email-address"
                       className="text-gray-300 flex items-center justify-between"
                     >
-                      NAME <BsThreeDotsVertical className="ml-2" />
+                      NAAM <BsThreeDotsVertical className="ml-2" />
                     </label>
                     <input
                       id="name"
@@ -132,7 +133,7 @@ export default function Edit() {
                       htmlFor="email-address"
                       className="text-gray-300 flex items-center justify-between"
                     >
-                      PHONE <BsThreeDotsVertical className="ml-2" />
+                      TELEFOON <BsThreeDotsVertical className="ml-2" />
                     </label>
                     <input
                       id="phone"
@@ -150,7 +151,7 @@ export default function Edit() {
                       htmlFor="email-address"
                       className="text-gray-300 flex items-center justify-between"
                     >
-                      ADDRESS <BsThreeDotsVertical className="ml-2" />
+                      ADRES <BsThreeDotsVertical className="ml-2" />
                     </label>
                     <input
                       id="address"
@@ -160,7 +161,7 @@ export default function Edit() {
                       onChange={(e) => setAddress(e.target.value)}
                       required
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                      placeholder="Your Address"
+                      placeholder="Jouw adres"
                     />
                   </div>
                   <div className="my-1 grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
@@ -168,7 +169,7 @@ export default function Edit() {
                       htmlFor="email-address"
                       className="text-gray-300 flex items-center justify-between"
                     >
-                      EMAIL <BsThreeDotsVertical className="ml-2" />
+                      E-MAIL <BsThreeDotsVertical className="ml-2" />
                     </label>
                     <input
                       id="email"
@@ -206,7 +207,7 @@ export default function Edit() {
                     htmlFor="notes"
                     className="text-gray-300 flex items-center justify-between"
                   >
-                    NOTES <BsThreeDotsVertical className="ml-2" />
+                    OPMERKINGEN <BsThreeDotsVertical className="ml-2" />
                   </label>
                   <textarea
                     name="notes"
@@ -220,10 +221,16 @@ export default function Edit() {
                 </div>
                 <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-5 rounded-md">
                   <div className="flex items-center justify-center gap-2">
-                    <p className="text-gray-300 flex items-center">START DATE <BsThreeDotsVertical className="ml-2" /> </p>
+                    <p className="text-gray-300 flex items-center">
+                      STARTDATUM
+                      <BsThreeDotsVertical className="ml-2" />{" "}
+                    </p>
                     <div className="bg-white rounded-md">
                       <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DateTimePicker
+                          ampm={false}
+                          ampmInClock={false}
+                          inputFormat="dd/MM/yyyy/ h:m"
                           renderInput={(props) => (
                             <TextField color="primary" {...props} />
                           )}
@@ -258,12 +265,15 @@ export default function Edit() {
                           htmlFor="file-upload"
                           className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                         >
-                          <span>Upload a file</span>
+                          <span>{filename}</span>
                           <input
                             id="file-upload"
                             name="file-upload"
                             type="file"
-                            onChange={(e) => setFileUpload(e.target.files[0])}
+                            onChange={(e) => {
+                              setFileUpload(e.target.files[0]);
+                              setFilename(e.target.files[0].name);
+                            }}
                             className="sr-only"
                           />
                         </label>
@@ -283,7 +293,7 @@ export default function Edit() {
                         aria-hidden="true"
                       />
                     </span>
-                    SAVE
+                    OPSLAANSAVE
                   </button>
                 </div>
               </form>

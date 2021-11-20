@@ -34,7 +34,7 @@ const SendModal = ({data2}) => {
         formData.append("task_id", data2.id);
         formData.append("role", option);
         PostAny("sendAlert", formData).then((response) => {
-            console.log(response);
+            // console.log(response);
             responseToast(response.message, response.type)
             setModalShow(false)
         })
@@ -44,8 +44,8 @@ const SendModal = ({data2}) => {
             <>
                 <button
                     onClick={(e) => setModalShow(!modalShow)}
-                    className="bg-sr text-white px-2 py-1 rounded-md">
-                    Send
+                    className="bg-sr text-white px-2 py-1 mb-1 rounded-md">
+                   Versturen
                 </button>
                 <Modal
                     show={modalShow} onHide={handleClose}

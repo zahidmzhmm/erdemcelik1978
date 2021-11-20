@@ -1,7 +1,3 @@
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import DateTimePicker from "@mui/lab/DateTimePicker";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import TextField from "@mui/material/TextField";
 import * as React from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { IoCheckmarkDoneCircle } from "react-icons/io5";
@@ -19,9 +15,12 @@ export default function AddData() {
   const [phone, setPhone] = React.useState("");
   const [address, setAddress] = React.useState("");
   const [email, setEmail] = React.useState("");
+  const [whatsapp, setWhatsapp] = React.useState("");
   const [notes, setNotes] = React.useState("");
   const [fileUpload1, setFileUpload1] = React.useState("");
   const [fileUpload2, setFileUpload2] = React.useState("");
+  const [file1, setFile1] = React.useState("Upload een bestand 1");
+  const [file2, setFile2] = React.useState("Upload een bestand 2");
   React.useEffect(() => {
     if (data === false) {
       GetAny("viewTask?id=" + id).then((response) => {
@@ -31,6 +30,7 @@ export default function AddData() {
         setPhone(response.data.phone);
         setAddress(response.data.address);
         setEmail(response.data.email);
+        setWhatsapp(response.data.whatsapp);
         setNotes(response.data.notes);
         // console.log(response)
       });
@@ -47,6 +47,7 @@ export default function AddData() {
     formData.append("phone", phone);
     formData.append("address", address);
     formData.append("email", email);
+    formData.append("whatsapp", whatsapp);
     formData.append("notes", notes);
     formData.append("files1", fileUpload1);
     formData.append("files2", fileUpload2);
@@ -65,7 +66,7 @@ export default function AddData() {
           <div className="bg-pr px-3 py-3 md:px-8 md:py-8 rounded-md">
             <div className="md:mt-0 md:col-span-2">
               <h1 className="text-center text-3xl font-medium text-gray-200">
-                Add Data
+                Gegevens toevoegen
               </h1>
               <form
                 onSubmit={(e) => formSubmit(e)}
@@ -79,7 +80,8 @@ export default function AddData() {
                       htmlFor="email-address"
                       className="text-gray-300 flex items-center justify-between"
                     >
-                      COMPANY<BsThreeDotsVertical className="ml-2" />
+                      BEDRIJF
+                      <BsThreeDotsVertical className="ml-2" />
                     </label>
                     <input
                       id="company-name"
@@ -89,7 +91,7 @@ export default function AddData() {
                       required
                       onChange={(e) => setCompany(e.target.value)}
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                      placeholder="Your Company"
+                      placeholder="Uw onderneming"
                     />
                   </div>
                   <div className="my-1 grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
@@ -97,7 +99,7 @@ export default function AddData() {
                       htmlFor="email-address"
                       className="text-gray-300 flex items-center justify-between"
                     >
-                      NAME <BsThreeDotsVertical className="ml-2" />
+                      NAAM <BsThreeDotsVertical className="ml-2" />
                     </label>
                     <input
                       id="name"
@@ -107,7 +109,7 @@ export default function AddData() {
                       onChange={(e) => setName(e.target.value)}
                       required
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                      placeholder="Jone Doe"
+                      placeholder="Jane Doe"
                     />
                   </div>
                   <div className="my-1 grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
@@ -115,7 +117,7 @@ export default function AddData() {
                       htmlFor="email-address"
                       className="text-gray-300 flex items-center justify-between"
                     >
-                      PHONE <BsThreeDotsVertical className="ml-2" />
+                      TELEFOON <BsThreeDotsVertical className="ml-2" />
                     </label>
                     <input
                       id="phone"
@@ -133,7 +135,7 @@ export default function AddData() {
                       htmlFor="email-address"
                       className="text-gray-300 flex items-center justify-between"
                     >
-                      ADDRESS <BsThreeDotsVertical className="ml-2" />
+                      ADRES <BsThreeDotsVertical className="ml-2" />
                     </label>
                     <input
                       id="address"
@@ -143,7 +145,7 @@ export default function AddData() {
                       onChange={(e) => setAddress(e.target.value)}
                       required
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                      placeholder="Your Address"
+                      placeholder="Jouw adres"
                     />
                   </div>
                   <div className="my-1 grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
@@ -151,7 +153,7 @@ export default function AddData() {
                       htmlFor="email-address"
                       className="text-gray-300 flex items-center justify-between"
                     >
-                      EMAIL <BsThreeDotsVertical className="ml-2" />
+                      E-MAIL <BsThreeDotsVertical className="ml-2" />
                     </label>
                     <input
                       id="email"
@@ -164,6 +166,24 @@ export default function AddData() {
                       placeholder="email@email.com"
                     />
                   </div>
+                  <div className="my-1 grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
+                    <label
+                      htmlFor="email-address"
+                      className="text-gray-300 flex items-center justify-between"
+                    >
+                      WHATAPP <BsThreeDotsVertical className="ml-2" />
+                    </label>
+                    <input
+                      id="whatsapp"
+                      name="whatsapp"
+                      value={whatsapp}
+                      type="text"
+                      onChange={(e) => setWhatsapp(e.target.value)}
+                      required
+                      className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                      placeholder="whatsapp-nummer"
+                    />
+                  </div>
                 </div>
 
                 <div className="my-1 grid w-full grid-cols-1 md:grid-cols-5 gap-2 md:gap-5">
@@ -171,7 +191,7 @@ export default function AddData() {
                     htmlFor="notes"
                     className="text-gray-300 flex items-center justify-between"
                   >
-                    NOTES <BsThreeDotsVertical className="ml-2" />
+                    OPMERKINGEN <BsThreeDotsVertical className="ml-2" />
                   </label>
                   <textarea
                     name="notes"
@@ -183,12 +203,15 @@ export default function AddData() {
                     rows="3"
                   />
                 </div>
-                <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-5 rounded-md">
+                {/* <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-5 rounded-md">
                   <div className="flex items-center justify-center gap-2">
                     <p className="text-gray-300 flex items-center">START DATE <BsThreeDotsVertical className="ml-2" /></p>
                     <div className="bg-white rounded-md">
                       <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DateTimePicker
+                          ampm={false}
+                          ampmInClock={false}
+                          inputFormat="dd/MM/yyyy/ h:m"
                           renderInput={(props) => (
                             <TextField color="primary" {...props} />
                           )}
@@ -201,7 +224,7 @@ export default function AddData() {
                     </div>
                   </div>
                
-                </div>
+                </div> */}
                 <div className="row">
                   <div className="col-md-6">
                     <div className="mt-1 flex justify-center px-3 pt-3 pb-1 border-2 border-gray-300 border-dashed rounded-md">
@@ -225,14 +248,15 @@ export default function AddData() {
                             htmlFor="file-upload"
                             className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                           >
-                            <span>Upload a file 1</span>
+                            <span>{file1}</span>
                             <input
                               id="file-upload"
                               name="file-upload"
                               type="file"
-                              onChange={(e) =>
+                              onChange={(e) => {
                                 setFileUpload1(e.target.files[0])
-                              }
+                                setFile1(e.target.files[0].name)
+                              }}
                               className="sr-only"
                             />
                           </label>
@@ -262,14 +286,15 @@ export default function AddData() {
                             htmlFor="file-upload"
                             className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                           >
-                            <span>Upload a file 2</span>
+                            <span>{file2}</span>
                             <input
                               id="file-upload"
                               name="file-upload"
                               type="file"
-                              onChange={(e) =>
+                              onChange={(e) => {
                                 setFileUpload2(e.target.files[0])
-                              }
+                                setFile2(e.target.files[0].name)
+                              }}
                               className="sr-only"
                             />
                           </label>
@@ -289,7 +314,7 @@ export default function AddData() {
                         aria-hidden="true"
                       />
                     </span>
-                    Complete
+                    Compleet
                   </button>
                 </div>
               </form>

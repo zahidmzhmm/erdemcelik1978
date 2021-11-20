@@ -17,36 +17,36 @@ const Archive = () => {
     const data = {
       columns: [
         {
-          label: "Company Name",
+          label: "Bedrijfsnaam",
           field: "company",
           width: 200,
         },
         {
-          label: "Name",
+          label: "Naam",
           field: "name",
           width: 200,
         },
 
         {
-          label: "Phone",
+          label: "Telefoon",
           field: "phone",
 
           width: 200,
         },
         {
-          label: "Address",
+          label: "Adres",
           field: "address",
 
           width: 200,
         },
         {
-          label: "Email",
+          label: "E-mail",
           field: "email",
 
           width: 200,
         },
         {
-          label: "Action",
+          label: "Actie",
           field: "action",
           width: 200,
         },
@@ -64,12 +64,12 @@ const Archive = () => {
               <div className="flex items-center">
                 <Link to={"/delete/" + data.id}>
                   <button className="bg-sr ml-2 text-white px-2 py-1 rounded-md">
-                    Delete
+                    Verwijderen
                   </button>
                 </Link>
                 <Link to={"/edit/" + data.id}>
                   <button className="bg-sr ml-2 text-white px-2 py-1 rounded-md">
-                    edit
+                    bewerking
                   </button>
                 </Link>
               </div>
@@ -82,7 +82,7 @@ const Archive = () => {
       <>
         <div className="bg-pr text-white p-4 rounded-md">
           <h1 className="text-white font-medium text-center text-3xl">
-            ARCHIVE
+          ARCHIEF
           </h1>
           <MDBDataTable responsiveMd hover bordered data={data} />
         </div>

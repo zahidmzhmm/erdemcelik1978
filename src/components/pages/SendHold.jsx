@@ -44,7 +44,7 @@ const SendHold = ({data2}) => {
                 <button
                     onClick={(e) => setModalShow(!modalShow)}
                     className="bg-sr text-white px-2 py-1 rounded-md">
-                    Send
+                    Versturen
                 </button>
                 <Modal
                     show={modalShow} onHide={handleClose}
@@ -57,7 +57,7 @@ const SendHold = ({data2}) => {
                                 {({open}) => (
                                     <>
                                         <Listbox.Label className="block text-xl font-medium text-gray-200 ">
-                                            SELECT STUFF
+                                        KIES DINGEN
                                         </Listbox.Label>
                                         <div className="relative">
                                             <Listbox.Button
@@ -150,7 +150,7 @@ const SendHold = ({data2}) => {
                             </div>
                             <div className="text-center mb-3">
                                 <Button type="submit" className={'rounded'} variant={"primary"}
-                                        size={"md"}>Submit</Button>
+                                        size={"md"}>Indienen</Button>
                             </div>
                         </form>
                     </Modal.Body>

@@ -1,9 +1,9 @@
 /* This example requires Tailwind CSS v2.0+ */
-import {Disclosure, Menu, Transition} from "@headlessui/react";
-import {Fragment} from "react";
-import {AiOutlineClose} from "react-icons/ai";
-import {FaBars} from "react-icons/fa";
-import {Link} from "react-router-dom";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Fragment } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import { FaBars } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -60,19 +60,7 @@ export default function Topbar({setToggle, toggle}) {
                                         >
                                             <Menu.Items
                                                 className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg border border-gray-500 border-opacity-5 bg-pr ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                                <Menu.Item>
-                                                    {({active}) => (
-                                                        <Link
-                                                            to="/settings"
-                                                            className={classNames(
-                                                                active ? "bg-sr rounded-sm" : "",
-                                                                "block px-4 py-3 font-medium text-sm text-white"
-                                                            )}
-                                                        >
-                                                            Settings
-                                                        </Link>
-                                                    )}
-                                                </Menu.Item>
+                                             
                                                 <Menu.Item>
                                                     {({active}) => (
                                                         <Link
@@ -82,7 +70,7 @@ export default function Topbar({setToggle, toggle}) {
                                                                 "block px-4 py-3 font-medium text-sm text-white"
                                                             )}
                                                         >
-                                                            Sign out
+                                                            Afmelden
                                                         </Link>
                                                     )}
                                                 </Menu.Item>
