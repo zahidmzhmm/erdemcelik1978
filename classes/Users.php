@@ -41,10 +41,6 @@ class Users
         $phone = !empty($data['phone']) ? $data['phone'] : "";
         $whatsapp = !empty($data['whatsapp']) ? $data['whatsapp'] : "";
         $role = $data['role'];
-        if (empty($name) || empty($email) || empty($password) || empty($role) || empty($token)) {
-            $this->core->response("All Field Required");
-            exit;
-        }
         $checking = $this->database->num_rows("select email from users where email='$email'");
         if ($checking > 0) {
             $this->core->response("User already exist");
@@ -68,10 +64,6 @@ class Users
         $phone = !empty($data['phone']) ? $data['phone'] : "";
         $whatsapp = !empty($data['whatsapp']) ? $data['whatsapp'] : "";
         $role = $data['role'];
-        if (empty($name) || empty($email) || empty($password) || empty($role) || empty($token)) {
-            $this->core->response("All Field Required");
-            exit;
-        }
         $checking = $this->database->num_rows("select email from users where email='$email'");
         if ($checking > 0) {
             $this->core->response("User already exist");

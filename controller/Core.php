@@ -8,10 +8,6 @@ class Core
 {
     public function __construct()
     {
-        if (!isset($_SERVER['HTTP_X_API_KEY'])) {
-            $this->response("Authorization Failed!");
-            exit;
-        }
         ErrorReport === 0 ? error_reporting(false) : error_reporting(E_ALL);
     }
 
@@ -27,6 +23,31 @@ class Core
             $type = end($ex_name);
             $file_tmp = $_FILES[$name]['tmp_name'];
             $file_size = $_FILES[$name]['size'];
+            if ($size <= $file_size) {
+                $filName = $random == true ? substr(sha1(md5(mt_rand(1000001, 9999999))), 0, 10) : $customName;
+                $fileName = $filName . '.' . $type;
+                $fileUploadName = APP_ROOT . 'api/uploads/' . $fileName;
+                if (file_exists($fileUploadName) == false) {
+                    $upload = move_uploaded_file($file_tmp, $fileUploadName);
+                    if ($upload === true) {
+                        return $fileName;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public function custom_file_upload($name, $file_tmp, $file_size, $random = true, $customName = null, $size = false)
+    {
+        if (isset($name)) {
+            $ex_name = explode('.', $name);
+            $type = end($ex_name);
             if ($size <= $file_size) {
                 $filName = $random == true ? substr(sha1(md5(mt_rand(1000001, 9999999))), 0, 10) : $customName;
                 $fileName = $filName . '.' . $type;

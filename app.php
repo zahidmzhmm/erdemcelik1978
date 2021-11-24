@@ -1,10 +1,8 @@
 <?php
 global $url;
-if(!$url["download"]){
-    if (!isset($_SERVER['HTTP_X_API_KEY']) && $_SERVER['HTTP_X_API_KEY']!=='admin12123') {
-        $core->response("Authorization Failed!");
-        exit;
-    }
+if ($url !== 'download' && !isset($_SERVER['HTTP_X_API_KEY']) && $_SERVER['HTTP_X_API_KEY'] !== 'admin12123') {
+    $core->response("Authorization Failed!");
+    exit;
 }
 switch ($url) {
     case "login":

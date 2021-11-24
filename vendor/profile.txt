@@ -1,10 +1,8 @@
-ID: 10
-Company Name: Zahid Hasan
-Name: dghdfl;ghdfl;ghdfl;gh
-Phone: 54844894894
-Address: klsdfghdfkghdfklgh
-Email: staff@staff.com
-Notes: fghfghfghfghfgh
+ID: 51
+Company Name: Com name
+Name: Admin Panel T
+Phone: 0123456789
+Address: sdgsdgsdg
+Email: zahidmzhmm@gmail.com
+Notes: sdsdgsdg
 
-Staff ID: 5
-Staff Name: Staff 03
