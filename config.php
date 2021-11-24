@@ -16,5 +16,5 @@ define('MAILER_EMAIL', 'zahid@fazgroupltd.com');
 define('MAILER_PASSWORD', 'Zahid@12345');*/
 define('MAILER_HOST', 'smtp.gmail.com');
 define('MAILER_EMAIL', 'mjhm118899@gmail.com');
-define('MAILER_PASSWORD', 'oanbrsecbkupqnym');
+define('MAILER_PASSWORD', '');
 define('ErrorReport', 1);
