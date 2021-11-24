@@ -258,14 +258,15 @@ export default function NewTask() {
                         htmlFor="file-upload"
                         className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                       >
-                        <span>{filename}</span>
+                        <span>{filename }</span>
                         <input
                           id="file-upload"
                           name="file-upload"
                           type="file"
+                          multiple
                           onChange={(e) => {
-                            setFileUpload(e.target.files[0])
-                            setFilename(e.target.files[0].name)
+                            setFileUpload(e.target.files)
+                            setFilename(e.target.files.length + " bestanden geselecteerd")
                           }}
                           className="sr-only"
                         />

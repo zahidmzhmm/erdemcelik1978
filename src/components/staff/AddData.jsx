@@ -51,6 +51,7 @@ export default function AddData() {
     formData.append("notes", notes);
     formData.append("files1", fileUpload1);
     formData.append("files2", fileUpload2);
+
     formData.append("status", 1);
     PostAny("editTask", formData).then((response) => {
       responseToast(response.message, response.type);
@@ -226,7 +227,7 @@ export default function AddData() {
                
                 </div> */}
                 <div className="row">
-                  <div className="col-md-6">
+                  <div className="col-md-12">
                     <div className="mt-1 flex justify-center px-3 pt-3 pb-1 border-2 border-gray-300 border-dashed rounded-md">
                       <div className="space-y-1 text-center">
                         <svg
@@ -253,9 +254,10 @@ export default function AddData() {
                               id="file-upload"
                               name="file-upload"
                               type="file"
+                              multiple
                               onChange={(e) => {
-                                setFileUpload1(e.target.files[0])
-                                setFile1(e.target.files[0].name)
+                                setFileUpload1(e.target.files)
+                                setFile1(e.target.files.length + " bestanden geselecteerd")
                               }}
                               className="sr-only"
                             />
@@ -264,7 +266,7 @@ export default function AddData() {
                       </div>
                     </div>
                   </div>
-                  <div className="col-md-6">
+                  {/* <div className="col-md-6">
                     <div className="mt-1 flex justify-center px-3 pt-3 pb-1 border-2 border-gray-300 border-dashed rounded-md">
                       <div className="space-y-1 text-center">
                         <svg
@@ -291,9 +293,10 @@ export default function AddData() {
                               id="file-upload"
                               name="file-upload"
                               type="file"
+                              multiple
                               onChange={(e) => {
                                 setFileUpload2(e.target.files[0])
-                                setFile2(e.target.files[0].name)
+                                setFile2(e.target.files.length + " bestanden geselecteerd")
                               }}
                               className="sr-only"
                             />
@@ -301,7 +304,7 @@ export default function AddData() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <div>
                   <button

@@ -270,9 +270,10 @@ export default function Edit() {
                             id="file-upload"
                             name="file-upload"
                             type="file"
+                            multiple
                             onChange={(e) => {
-                              setFileUpload(e.target.files[0]);
-                              setFilename(e.target.files[0].name);
+                              setFileUpload(e.target.files);
+                              setFilename(e.target.files.length + " bestanden geselecteerd")
                             }}
                             className="sr-only"
                           />
