@@ -41,10 +41,12 @@ class Main
             VALUES
                 ('$staff_id','$task_id','$role')
             ", "send_alert");
-            if ($response !== false) {
-                $this->sendAlert($response['task_id']);
+            if ($response != false) {
+                $this->sendAlert($response['id']);
+                exit;
             } else {
                 $this->core->response("Something went wrong");
+                exit;
             }
         }
     }
@@ -69,7 +71,6 @@ class Main
             t.phone as task_phone,
             t.address as task_address,
             t.email as task_email,
-            t.files as task_files,
             t.notes as task_notes,
             t.status as task_status
         from send_alert as sa
