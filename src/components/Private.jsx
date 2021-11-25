@@ -15,6 +15,7 @@ const Private = ({children, ...rest}) => {
     React.useEffect(() => {
         if (userData === false) {
             GetAny("viewUserToken?token=" + localData).then((response) => {
+                console.log(response)
                 setUserData(response.data)
             })
         }

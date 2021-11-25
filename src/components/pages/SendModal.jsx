@@ -10,7 +10,7 @@ function classNames(...classes) {
 }
 
 
-const SendModal = ({data2}) => {
+const SendModal = ({ data2 }) => {
     const [modalShow, setModalShow] = React.useState(false);
     const [data, setData] = useState(false);
     const [selected, setSelected] = useState(0);
@@ -28,7 +28,7 @@ const SendModal = ({data2}) => {
     })
     const formSubmit = (e) => {
         e.preventDefault()
-        console.log(data2)
+        // console.log(data2)
         const formData = new FormData();
         formData.append("staff_id", selected.id);
         formData.append("task_id", data2.id);
@@ -45,7 +45,7 @@ const SendModal = ({data2}) => {
                 <button
                     onClick={(e) => setModalShow(!modalShow)}
                     className="bg-sr text-white px-2 py-1 mb-1 rounded-md">
-                   Versturen
+                    Versturen
                 </button>
                 <Modal
                     show={modalShow} onHide={handleClose}
@@ -55,7 +55,7 @@ const SendModal = ({data2}) => {
                     <Modal.Body className="bg-pr px-5 py-4">
                         <form action="" onSubmit={(e) => formSubmit(e)}>
                             <Listbox value={selected} onChange={setSelected}>
-                                {({open}) => (
+                                {({ open }) => (
                                     <>
                                         <Listbox.Label className="block text-xl font-medium text-gray-200 ">
                                             SELECT STUFF
@@ -63,20 +63,20 @@ const SendModal = ({data2}) => {
                                         <div className="relative">
                                             <Listbox.Button
                                                 className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                    <span className="flex items-center">
-                                      <img
-                                          src="/user.jpg"
-                                          alt=""
-                                          className="flex-shrink-0 h-6 w-6 rounded-full"
-                                      />
-                                      <span className="ml-3 block truncate">
-                                        {selected.name}
-                                      </span>
-                                    </span>
+                                                <span className="flex items-center">
+                                                    <img
+                                                        src="/user.jpg"
+                                                        alt=""
+                                                        className="flex-shrink-0 h-6 w-6 rounded-full"
+                                                    />
+                                                    <span className="ml-3 block truncate">
+                                                        {selected.name}
+                                                    </span>
+                                                </span>
                                                 <span
                                                     className="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                                        <SelectorIcon className="h-5 w-5 text-gray-400" aria-hidden="true"/>
-                                    </span>
+                                                    <SelectorIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                                                </span>
                                             </Listbox.Button>
 
                                             <Transition
@@ -91,7 +91,7 @@ const SendModal = ({data2}) => {
                                                         person.role == 'staff' &&
                                                         <Listbox.Option
                                                             key={person.id}
-                                                            className={({active}) =>
+                                                            className={({ active }) =>
                                                                 classNames(
                                                                     active
                                                                         ? "text-white bg-indigo-600"
@@ -100,7 +100,7 @@ const SendModal = ({data2}) => {
                                                                 )
                                                             }
                                                             value={person}>
-                                                            {({selected, active}) => (
+                                                            {({ selected, active }) => (
                                                                 <>
                                                                     <div className="flex items-center">
                                                                         <img
@@ -112,16 +112,16 @@ const SendModal = ({data2}) => {
                                                                             selected ? "font-semibold" : "font-normal",
                                                                             "ml-3 block truncate"
                                                                         )}>
-                                                                    {person.name}
-                                                                </span>
+                                                                            {person.name}
+                                                                        </span>
                                                                     </div>
                                                                     {selected ? (
                                                                         <span className={classNames(
                                                                             active ? "text-white" : "text-indigo-600",
                                                                             "absolute inset-y-0 right-0 flex items-center pr-4"
                                                                         )}>
-                                                                    <CheckIcon className="h-5 w-5" aria-hidden="true"/>
-                                                                </span>
+                                                                            <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                                                                        </span>
                                                                     ) : null}
                                                                 </>
                                                             )}
@@ -137,21 +137,13 @@ const SendModal = ({data2}) => {
                                 <div className={`form-group ${option == 1 ? 'active' : ''}`}>
                                     <label htmlFor="email">Email</label>
                                     <input type="checkbox" id="email" onChange={(e) => setOption(1)}
-                                           className="d-none"/>
+                                        className="d-none" />
                                 </div>
-                                <div className={`form-group ${option == 2 ? 'active' : ''}`}>
-                                    <label htmlFor="sms">SMS</label>
-                                    <input type="checkbox" onChange={(e) => setOption(2)} id="sms" className="d-none"/>
-                                </div>
-                                <div className={`form-group ${option == 3 ? 'active' : ''}`}>
-                                    <label htmlFor="whatsapp">WhatsApp</label>
-                                    <input type="checkbox" onChange={(e) => setOption(3)} id="whatsapp"
-                                           className="d-none"/>
-                                </div>
+                              
                             </div>
                             <div className="text-center mb-3">
                                 <Button type="submit" className={'rounded'} variant={"primary"}
-                                        size={"md"}>Submit</Button>
+                                    size={"md"}>Submit</Button>
                             </div>
                         </form>
                     </Modal.Body>

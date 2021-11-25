@@ -9,7 +9,7 @@ const Dashboard = () => {
   React.useEffect(() => {
     if (dashboardData === false) {
       GetAny("ntwc").then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setDashboardData(response.data);
       });
     }
@@ -31,25 +31,25 @@ const Dashboard = () => {
         {userData.role == "admin" && (
           <div className="w-full py-5 grid grid-cols-1 lg:grid-cols-3 gap-5 items-center">
             <Link to="/newTask">
-              <div className="bg-sr text-gray-200 text-center py-14 rounded-md">
+              <div style={{padding:'59px 0'}} className="bg-sr text-gray-200 text-center rounded-md">
                 <h1 className="text-2xl font-semibold">NIEUWE TAAK</h1>
               </div>
             </Link>
             <Link to="/progress">
               <div className="bg-sr text-gray-200 text-center py-6 rounded-md">
-                <h1 className="text-2xl font-semibold">Voortgang</h1>
+                <h1 className="text-2xl font-semibold">Meten</h1>
                 <h1 className="text-7xl font-bold">{dashboardData.progress}</h1>
               </div>
             </Link>
             <Link to="/hold">
               <div className="bg-sr text-gray-200 text-center py-6 rounded-md">
-                <h1 className="text-2xl font-semibold">Uitstel</h1>
+                <h1 className="text-2xl font-semibold">Wacht</h1>
                 <h1 className="text-7xl font-bold">{dashboardData.waitTask}</h1>
               </div>
             </Link>
             <Link to="/complete">
               <div className="bg-sr text-gray-200 text-center py-6 rounded-md">
-                <h1 className="text-2xl font-semibold">VOLTOOID</h1>
+                <h1 className="text-2xl font-semibold">Afgerond</h1>
                 <h1 className="text-7xl font-bold">{dashboardData.doneTask}</h1>
               </div>
             </Link>

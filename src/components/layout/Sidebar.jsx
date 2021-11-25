@@ -72,7 +72,7 @@ const Sidebar = ({ toggle, setToggle }) => {
                   <div className="flex animate items-center justify-between text-sm text-gray-300 ">
                     <div className="flex items-center ">
                       <GiProgression className=" mr-3 w-4 h-4 text-sm" />{" "}
-                      <h6 className="pt-1 font-medium">VOORTGANG</h6>
+                      <h6 className="pt-1 font-medium">METEN</h6>
                     </div>
                     <AiOutlineRight />
                   </div>
@@ -85,7 +85,7 @@ const Sidebar = ({ toggle, setToggle }) => {
                   <div className="flex animate items-center justify-between text-sm text-gray-300 ">
                     <div className="flex items-center ">
                       <GiRobotGrab className=" mr-3 w-4 h-4 text-sm" />{" "}
-                      <h6 className="pt-1 font-medium">UITSTEL</h6>
+                      <h6 className="pt-1 font-medium">WACHT</h6>
                     </div>
                     <AiOutlineRight />
                   </div>
@@ -98,7 +98,7 @@ const Sidebar = ({ toggle, setToggle }) => {
                   <div className="flex animate items-center justify-between text-sm text-gray-300 ">
                     <div className="flex items-center ">
                       <IoCheckmarkDone className=" mr-3 w-4 h-4 text-sm" />{" "}
-                      <h6 className="pt-1 font-medium">COMPLEET</h6>
+                      <h6 className="pt-1 font-medium">AFGEROND</h6>
                     </div>
                     <AiOutlineRight />
                   </div>
@@ -126,7 +126,7 @@ const Sidebar = ({ toggle, setToggle }) => {
                   <div className="flex animate items-center justify-between text-sm text-gray-300 ">
                     <div className="flex items-center ">
                       <BiUserCircle className=" mr-3 w-4 h-4 text-sm" />{" "}
-                      <h6 className="pt-1 font-medium">GEBRUIKERS</h6>
+                      <h6 className="pt-1 font-medium">PERSONEEL</h6>
                     </div>
                     <AiOutlineRight />
                   </div>
@@ -158,7 +158,7 @@ const Sidebar = ({ toggle, setToggle }) => {
                   <div className="flex animate items-center justify-between text-sm text-gray-300 ">
                     <div className="flex items-center ">
                       <GiProgression className=" mr-3 w-4 h-4 text-sm" />{" "}
-                      <h6 className="pt-1 font-medium">VOORTGANG</h6>
+                      <h6 className="pt-1 font-medium">METEN</h6>
                     </div>
                     <AiOutlineRight />
                   </div>

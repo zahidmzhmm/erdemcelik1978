@@ -69,7 +69,7 @@ const Archive = () => {
                 </Link>
                 <Link to={"/edit/" + data.id}>
                   <button className="bg-sr ml-2 text-white px-2 py-1 rounded-md">
-                    bewerking
+                    bewerken
                   </button>
                 </Link>
               </div>

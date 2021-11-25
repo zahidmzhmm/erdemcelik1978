@@ -15,7 +15,6 @@ export const PostAny = async (page, data) => {
         method: "post",
         data: data
     }).then((response) => {
-        
         return response.data
     });
 }

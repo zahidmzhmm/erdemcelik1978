@@ -11,6 +11,7 @@ const StaffProgress = () => {
   React.useEffect(() => {
     if (progressData === false) {
       GetAny("alerts").then((response) => {
+        console.log(response)
         setProgressData(response.data);
       });
     }

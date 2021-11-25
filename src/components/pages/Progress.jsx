@@ -12,6 +12,7 @@ const Progress = () => {
   React.useEffect(() => {
     if (progressData === false) {
       GetAny("tasks").then((response) => {
+        // console.log(response)
         setProgressData(response.data);
       });
     }
@@ -70,7 +71,7 @@ const Progress = () => {
                   <SendModal data2={data} />
                   <Link className="mt-1" to={"/edit/" + data.id}>
                     <button className="bg-sr ml-2 text-white px-2 py-1 rounded-md">
-                    Bewerking
+                    Bewerken
                     </button>
                   </Link>
                 </>

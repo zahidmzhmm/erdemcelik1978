@@ -138,15 +138,7 @@ const SendHold = ({data2}) => {
                                     <input type="checkbox" id="email" onChange={(e) => setOption(1)}
                                            className="d-none"/>
                                 </div>
-                                <div className={`form-group ${option == 2 ? 'active' : ''}`}>
-                                    <label htmlFor="sms">SMS</label>
-                                    <input type="checkbox" onChange={(e) => setOption(2)} id="sms" className="d-none"/>
-                                </div>
-                                <div className={`form-group ${option == 3 ? 'active' : ''}`}>
-                                    <label htmlFor="whatsapp">WhatsApp</label>
-                                    <input type="checkbox" onChange={(e) => setOption(3)} id="whatsapp"
-                                           className="d-none"/>
-                                </div>
+                              
                             </div>
                             <div className="text-center mb-3">
                                 <Button type="submit" className={'rounded'} variant={"primary"}

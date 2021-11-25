@@ -2,27 +2,32 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import TextField from "@mui/material/TextField";
-import * as React from "react";
+import React, { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import { useParams } from "react-router-dom";
 import { GetAny, PostAny, responseToast } from "../../main";
-
+import { AiFillCloseCircle } from "react-icons/ai";
+import { Spinner } from 'react-bootstrap';
 export default function Edit() {
   const { id } = useParams();
   const [data, setData] = React.useState(false);
+  const [previewitems, setPreviewitems] = React.useState([])
+  const [loader, setLoader] = useState(false)
   React.useEffect(() => {
     if (data === false) {
       GetAny("viewTask?id=" + id).then((response) => {
-        setData(response.data);
-        setCompany(response.data.c_name);
-        setName(response.data.name);
-        setPhone(response.data.phone);
-        setAddress(response.data.address);
-        setEmail(response.data.email);
-        setNotes(response.data.notes);
-        setStatus(response.data.status);
-        setWhatsapp(response.data.whatsapp)
+        console.log(response)
+        // setPreviewitems(response.data.files)
+        setData(response.data.task);
+        setCompany(response.data.task.c_name);
+        setName(response.data.task.name);
+        setPhone(response.data.task.phone);
+        setAddress(response.data.task.address);
+        setEmail(response.data.task.email);
+        setNotes(response.data.task.notes);
+        setStatus(response.data.task.status);
+        setWhatsapp(response.data.task.whatsapp)
       });
     }
   });
@@ -34,13 +39,14 @@ export default function Edit() {
   const [address, setAddress] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [notes, setNotes] = React.useState("");
-  const [fileUpload, setFileUpload] = React.useState("");
+  // const [fileUpload, setFileUpload] = React.useState("");
   const [status, setStatus] = React.useState("");
   const [whatsapp, setWhatsapp] = React.useState("");
-  const [filename, setFilename] = React.useState("Een bestand uploaden");
-  
+
+
   const formSubmit = (e) => {
     e.preventDefault();
+    setLoader(true)
     const formData = new FormData();
     formData.append("start", start);
     formData.append("end", end);
@@ -50,14 +56,38 @@ export default function Edit() {
     formData.append("address", address);
     formData.append("email", email);
     formData.append("notes", notes);
-    formData.append("files", fileUpload);
+
     formData.append("status", status);
     formData.append("whatsapp", whatsapp);
     formData.append("id", id);
-    PostAny("editTask", formData).then((response) =>
-      responseToast(response.message, response.type)
+    for (let i = 0; i < previewitems.length; i++) {
+      formData.append(`files[${i}]`, previewitems[i])
+    }
+    PostAny("editTask", formData).then((response) => {
+      setLoader(false)
+      console.log(response)
+      if(response.status === 200){
+        responseToast(response.message, response.type);
+      }
+    }
     );
   };
+  const filePreview = (data) => {
+    let items = [];
+    for (let i = 0; i < data.length; i++) {
+      items[i] = data[i];
+    }
+    // console.log(items[0].name)
+    setPreviewitems(previewitems.concat(items))
+
+
+  }
+  const filterItem = (data) => {
+    const filterarray = previewitems.filter((item) => item !== data)
+
+    setPreviewitems(filterarray)
+
+  }
   if (data !== false) {
     return (
       <>
@@ -65,9 +95,12 @@ export default function Edit() {
           <div className="bg-pr px-3 py-3 md:px-8 md:py-8 rounded-md">
             <div className="md:mt-0 md:col-span-2">
               <h1 className="text-center text-xl font-medium text-gray-200">
-              TAAK BEWERKEN
+                TAAK BEWERKEN
               </h1>
-              <form
+              {loader && <div style={{ background: 'rgba(0,0,0,0.8)' }} className="w-full h-screen z-40 absolute top-0 left-0 flex items-center justify-center">
+                <Spinner animation="grow" className="text-sr text-3xl" /> <h2 className=" text-xl lg:text-4xl font-bold text-sr">Bestanden uploaden</h2>
+              </div>}
+              {!loader && <form
                 onSubmit={(e) => formSubmit(e)}
                 className="mt-8 space-y-6"
                 action="#"
@@ -79,16 +112,16 @@ export default function Edit() {
                       htmlFor="notes"
                       className="text-gray-300 flex items-center justify-between"
                     >
-                      TOESTAND <BsThreeDotsVertical className="ml-2" />
+                      STATUS <BsThreeDotsVertical className="ml-2" />
                     </label>
                     <select
                       onChange={(e) => setStatus(e.target.value)}
                       className="browser-default bg-pr text-white custom-select w-48"
                     >
-                      <option value="1">Compleet</option>
-                      <option value="2">Uitstel</option>
+                      <option value="1">Afgerond</option>
+                      <option value="2">Wacht</option>
                       <option selected value="3">
-                        Voortgang
+                        Meten
                       </option>
                       <option value="4">Archief</option>
                     </select>
@@ -105,7 +138,7 @@ export default function Edit() {
                       name="company"
                       type="text"
                       value={company}
-                      required
+
                       onChange={(e) => setCompany(e.target.value)}
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Uw onderneming"
@@ -124,7 +157,7 @@ export default function Edit() {
                       value={name}
                       type="text"
                       onChange={(e) => setName(e.target.value)}
-                      required
+
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Jone Doe"
                     />
@@ -142,7 +175,7 @@ export default function Edit() {
                       value={phone}
                       type="number"
                       onChange={(e) => setPhone(e.target.value)}
-                    
+
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="+001122334455"
                     />
@@ -160,7 +193,7 @@ export default function Edit() {
                       value={address}
                       type="text"
                       onChange={(e) => setAddress(e.target.value)}
-                      
+
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Jouw adres"
                     />
@@ -178,7 +211,7 @@ export default function Edit() {
                       value={email}
                       type="email"
                       onChange={(e) => setEmail(e.target.value)}
-                    
+
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="email@email.com"
                     />
@@ -246,34 +279,40 @@ export default function Edit() {
                 <div>
                   <div className="mt-1 flex justify-center px-3 pt-3 pb-1 border-2 border-gray-300 border-dashed rounded-md">
                     <div className="space-y-1 text-center">
-                      <svg
-                        className="mx-auto h-12 w-12 text-gray-400"
-                        stroke="currentColor"
-                        fill="none"
-                        viewBox="0 0 48 48"
-                        aria-hidden="true"
-                      >
-                        <path
-                          d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                          strokeWidth={2}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
+                      {previewitems.length !== 0 ?
+                        <div className="text-white">{previewitems.map((item, ind) => (
+                          <div key={ind} className="text-white flex items-center gap-1">
+                            <p className="text-sm">{item.name}</p>
+                            <AiFillCloseCircle onClick={() => filterItem(item)} className="ml-2 text-white cursor-pointer" /> </div>
+                        ))}</div>
+                        : <svg
+                          className="mx-auto h-12 w-12 text-gray-400"
+                          stroke="currentColor"
+                          fill="none"
+                          viewBox="0 0 48 48"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                            strokeWidth={2}
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>}
                       <div className="flex text-sm text-gray-600">
                         <label
                           htmlFor="file-upload"
                           className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                         >
-                          <span>{filename}</span>
+                          <span>Een bestand uploaden</span>
                           <input
                             id="file-upload"
                             name="file-upload"
                             type="file"
                             multiple
                             onChange={(e) => {
-                              setFileUpload(e.target.files);
-                              setFilename(e.target.files.length + " bestanden geselecteerd")
+                              filePreview(e.target.files)
+
                             }}
                             className="sr-only"
                           />
@@ -294,10 +333,10 @@ export default function Edit() {
                         aria-hidden="true"
                       />
                     </span>
-                    OPSLAANSAVE
+                    OPSLAAN
                   </button>
                 </div>
-              </form>
+              </form>}
             </div>
           </div>
         </div>
