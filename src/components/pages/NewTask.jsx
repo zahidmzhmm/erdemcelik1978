@@ -7,7 +7,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import { PostAny, responseToast } from "../../main";
-import {Spinner} from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 
 export default function NewTask() {
   const [start, setStart] = React.useState(new Date());
@@ -23,7 +23,7 @@ export default function NewTask() {
   const [previewitems, setPreviewitems] = useState([])
   const [loader, setLoader] = useState(false)
   const formSubmit = (e) => {
-    
+
     e.preventDefault();
     setLoader(true)
     const formData = new FormData();
@@ -79,10 +79,10 @@ export default function NewTask() {
             <h1 className="text-center text-3xl font-medium text-gray-200">
               NIEUWE TAAK
             </h1>
-          {loader &&  <div style={{background:'rgba(0,0,0,0.9)'}} className="w-full h-screen z-40 absolute top-0 left-0 flex items-center justify-center">
-           <Spinner animation="grow" className="text-sr text-3xl" /> <h2 className=" text-xl lg:text-4xl font-bold text-sr">Bestanden uploaden</h2>
-           </div>}
-           {!loader && <form
+            {loader && <div style={{ background: 'rgba(0,0,0,0.9)' }} className="w-full h-screen z-40 absolute top-0 left-0 flex items-center justify-center">
+              <Spinner animation="grow" className="text-sr text-3xl" /> <h2 className=" text-xl lg:text-4xl font-bold text-sr">Bestanden uploaden</h2>
+            </div>}
+            {!loader && <form
               onSubmit={(e) => formSubmit(e)}
               className="mt-8 space-y-3"
               action="#"
@@ -285,7 +285,7 @@ export default function NewTask() {
                         />
                       </svg>}
                     <div className="flex text-sm text-gray-600">
-                      <label
+                      {/* <label
                         htmlFor="file-upload"
                         className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                       >
@@ -304,14 +304,20 @@ export default function NewTask() {
 
                         />
 
-                      </label>
+                      </label> */}
+                      <div class="form-group">
+                        <label for="exampleFormControlFile1" className="text-white bg-sr px-1 py-1 rounded-sm cursor-pointer">Een bestand uploaden</label>
+                        <input hidden multiple type="file" onChange={(e) => {
+                          filePreview(e.target.files)
+                        }} class="form-control-file" id="exampleFormControlFile1" />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div>
-               {!loader && <button
+                {!loader && <button
                   type="submit"
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >

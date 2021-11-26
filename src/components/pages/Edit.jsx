@@ -66,7 +66,7 @@ export default function Edit() {
     PostAny("editTask", formData).then((response) => {
       setLoader(false)
       console.log(response)
-      if(response.status === 200){
+      if (response.status === 200) {
         responseToast(response.message, response.type);
       }
     }
@@ -300,7 +300,7 @@ export default function Edit() {
                           />
                         </svg>}
                       <div className="flex text-sm text-gray-600">
-                        <label
+                        {/* <label
                           htmlFor="file-upload"
                           className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                         >
@@ -316,7 +316,13 @@ export default function Edit() {
                             }}
                             className="sr-only"
                           />
-                        </label>
+                        </label> */}
+                        <div class="form-group">
+                          <label for="exampleFormControlFile1" className="text-white bg-sr px-1 py-1 rounded-sm cursor-pointer">Een bestand uploaden</label>
+                          <input hidden multiple type="file" onChange={(e) => {
+                            filePreview(e.target.files)
+                          }} class="form-control-file" id="exampleFormControlFile1" />
+                        </div>
                       </div>
                     </div>
                   </div>
