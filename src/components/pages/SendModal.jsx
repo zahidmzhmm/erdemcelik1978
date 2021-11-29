@@ -4,7 +4,7 @@ import React, { Fragment, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { GetAny, PostAny, responseToast } from "../../main";
 import "./modal.scss";
-
+import { FiSend } from "react-icons/fi"
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
@@ -45,7 +45,7 @@ const SendModal = ({ data2 }) => {
                 <button
                     onClick={(e) => setModalShow(!modalShow)}
                     className="bg-sr text-white px-2 py-1 mb-1 rounded-md">
-                    Versturen
+                    <FiSend className="w-5 h-5"/>
                 </button>
                 <Modal
                     show={modalShow} onHide={handleClose}

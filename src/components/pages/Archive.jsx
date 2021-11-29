@@ -62,7 +62,7 @@ const Archive = () => {
             email: data.email,
             action: (
               <div className="flex items-center">
-                <Link to={"/delete/" + data.id}>
+                <Link to={"/delete/archive/" + data.id}>
                   <button className="bg-sr ml-2 text-white px-2 py-1 rounded-md">
                     Verwijderen
                   </button>

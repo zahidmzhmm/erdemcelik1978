@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import { useHistory, useParams } from "react-router-dom";
@@ -20,22 +20,25 @@ export default function AddData() {
   const [whatsapp, setWhatsapp] = React.useState("");
   const [notes, setNotes] = React.useState("");
   const [loader, setLoader] = useState(false)
+  const [storefiles, setStorefiles] = useState([])
+  const [reload, setReload] = useState(false)
   React.useEffect(() => {
-    if (data === false) {
-      GetAny("viewTask?id=" + id).then((response) => {
-        setData(response.data.task);
-        setCompany(response.data.task.c_name);
-        setName(response.data.task.name);
-        setPhone(response.data.task.phone);
-        setAddress(response.data.task.address);
-        setEmail(response.data.task.email);
-        setWhatsapp(response.data.task.whatsapp);
-        setNotes(response.data.task.notes);
-        
-        // console.log(response)
-      });
-    }
-  });
+    GetAny("viewTask?id=" + id).then((response) => {
+      setData(response.data.task);
+      setCompany(response.data.task.c_name);
+      setName(response.data.task.name);
+      setPhone(response.data.task.phone);
+      setAddress(response.data.task.address);
+      setEmail(response.data.task.email);
+      setWhatsapp(response.data.task.whatsapp);
+      setNotes(response.data.task.notes);
+      if(response.data.files){
+        setStorefiles(response.data.files)
+      }
+     
+    });
+
+  }, [reload]);
   const formSubmit = (e) => {
     e.preventDefault();
     setLoader(true)
@@ -67,7 +70,7 @@ export default function AddData() {
     for (let i = 0; i < data.length; i++) {
       items[i] = data[i];
     }
-  // console.log(items[0].name)
+    // console.log(items[0].name)
     setPreviewitems(previewitems.concat(items))
 
 
@@ -78,10 +81,19 @@ export default function AddData() {
     setPreviewitems(filterarray)
 
   }
+  const delteFiles = (id) => {
+    GetAny("deleteFiles?id=" + id).then((response) => {
+      if (response.status == 200) {
+        // console.log("here")
+        setReload(true)
+      }
+    })
+  }
+
   if (data !== false) {
     return (
       <>
-        <div className="overflow-x-hidden">    
+        <div className="overflow-x-hidden">
           <div className="bg-pr px-3 py-3 md:px-8 md:py-8 rounded-md">
             <div className="md:mt-0 md:col-span-2">
               <h1 className="text-center text-3xl font-medium text-gray-200">
@@ -110,7 +122,7 @@ export default function AddData() {
                       name="company"
                       type="text"
                       value={company}
-                   
+
                       onChange={(e) => setCompany(e.target.value)}
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Uw onderneming"
@@ -129,7 +141,7 @@ export default function AddData() {
                       value={name}
                       type="text"
                       onChange={(e) => setName(e.target.value)}
-                     
+
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Jane Doe"
                     />
@@ -147,7 +159,7 @@ export default function AddData() {
                       value={phone}
                       type="number"
                       onChange={(e) => setPhone(e.target.value)}
-                      
+
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="+001122334455"
                     />
@@ -165,7 +177,7 @@ export default function AddData() {
                       value={address}
                       type="text"
                       onChange={(e) => setAddress(e.target.value)}
-                     
+
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Jouw adres"
                     />
@@ -183,7 +195,7 @@ export default function AddData() {
                       value={email}
                       type="email"
                       onChange={(e) => setEmail(e.target.value)}
-                   
+
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="email@email.com"
                     />
@@ -201,7 +213,7 @@ export default function AddData() {
                       value={whatsapp}
                       type="text"
                       onChange={(e) => setWhatsapp(e.target.value)}
-                    
+
                       className="appearance-none col-span-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="whatsapp-nummer"
                     />
@@ -225,119 +237,55 @@ export default function AddData() {
                     rows="3"
                   />
                 </div>
-                {/* <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-5 rounded-md">
-                  <div className="flex items-center justify-center gap-2">
-                    <p className="text-gray-300 flex items-center">START DATE <BsThreeDotsVertical className="ml-2" /></p>
-                    <div className="bg-white rounded-md">
-                      <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DateTimePicker
-                          ampm={false}
-                          ampmInClock={false}
-                          inputFormat="dd/MM/yyyy/ h:m"
-                          renderInput={(props) => (
-                            <TextField color="primary" {...props} />
-                          )}
-                          value={start}
-                          onChange={(start) => {
-                            setStart(start);
-                          }}
-                        />
-                      </LocalizationProvider>
-                    </div>
-                  </div>
-               
-                </div> */}
+
                 <div className="row">
                   <div className="col-md-12">
                     <div className="mt-1 flex justify-center px-3 pt-3 pb-1 border-2 border-gray-300 border-dashed rounded-md">
                       <div className="space-y-1 text-center">
-                      {previewitems.length !== 0 ?
-                      <div className="text-white">{previewitems.map((item, ind) => (
-                        <div key={ind} className="text-white flex items-center gap-1">
-                          <p className="text-sm">{item.name}</p>
-                          <AiFillCloseCircle onClick={() => filterItem(item)} className="ml-2 text-white cursor-pointer" /> </div>
-                      ))}</div>
-                      : <svg
-                        className="mx-auto h-12 w-12 text-gray-400"
-                        stroke="currentColor"
-                        fill="none"
-                        viewBox="0 0 48 48"
-                        aria-hidden="true"
-                      >
-                        <path
-                          d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                          strokeWidth={2}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>}
-                        <div className="flex text-sm text-gray-600">
-                          {/* <label
-                            htmlFor="file-upload"
-                            className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                        {(storefiles.length === 0 && previewitems.length === 0) &&
+                          <svg
+                            className="mx-auto h-12 w-12 text-gray-400"
+                            stroke="currentColor"
+                            fill="none"
+                            viewBox="0 0 48 48"
+                            aria-hidden="true"
                           >
-                            <span>Een bestand uploaden</span>
-                            <input
-                              id="file-upload"
-                              name="file-upload"
-                              type="file"
-                              multiple
-                              onChange={(e) => {
-                               
-                                filePreview(e.target.files)
-                              }}
-                              className="sr-only"
+                            <path
+                              d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                              strokeWidth={2}
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
                             />
-                          </label> */}
-                             <div class="form-group">
-                          <label for="exampleFormControlFile1" className="text-white bg-sr px-1 py-1 rounded-sm cursor-pointer">Een bestand uploaden</label>
-                          <input hidden multiple type="file" onChange={(e) => {
-                            filePreview(e.target.files)
-                          }} class="form-control-file" id="exampleFormControlFile1" />
-                        </div>
+                          </svg>
+                        }
+                        {
+                          storefiles.length !== 0 &&
+                          <div className="text-white">{storefiles.map((item, ind) => (
+                            <div key={ind} className="text-white flex items-center gap-1">
+                              <p className="text-sm">{item.path}</p>
+                              <AiFillCloseCircle onClick={() => delteFiles(item.id)} className="ml-2 text-white cursor-pointer" /> </div>
+                          ))}</div>
+                        }
+                        {previewitems.length !== 0 &&
+                          <div className="text-white">{previewitems.map((item, ind) => (
+                            <div key={ind} className="text-white flex items-center gap-1">
+                              <p className="text-sm">{item.name}</p>
+                              <AiFillCloseCircle onClick={() => filterItem(item)} className="ml-2 text-white cursor-pointer" /> </div>
+                          ))}</div>
+                        }
+                        <div className="flex text-sm text-gray-600">
+
+                          <div class="form-group">
+                            <label for="exampleFormControlFile1" className="text-white bg-sr px-1 py-1 rounded-sm cursor-pointer">Een bestand uploaden</label>
+                            <input hidden multiple type="file" onChange={(e) => {
+                              filePreview(e.target.files)
+                            }} class="form-control-file" id="exampleFormControlFile1" />
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  {/* <div className="col-md-6">
-                    <div className="mt-1 flex justify-center px-3 pt-3 pb-1 border-2 border-gray-300 border-dashed rounded-md">
-                      <div className="space-y-1 text-center">
-                        <svg
-                          className="mx-auto h-12 w-12 text-gray-400"
-                          stroke="currentColor"
-                          fill="none"
-                          viewBox="0 0 48 48"
-                          aria-hidden="true"
-                        >
-                          <path
-                            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                            strokeWidth={2}
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                        <div className="flex text-sm text-gray-600">
-                          <label
-                            htmlFor="file-upload"
-                            className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-                          >
-                            <span>{file2}</span>
-                            <input
-                              id="file-upload"
-                              name="file-upload"
-                              type="file"
-                              multiple
-                              onChange={(e) => {
-                                setFileUpload2(e.target.files[0])
-                                setFile2(e.target.files.length + " bestanden geselecteerd")
-                              }}
-                              className="sr-only"
-                            />
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
+
                 </div>
                 <div>
                   <button

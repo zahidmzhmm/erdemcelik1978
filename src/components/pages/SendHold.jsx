@@ -3,6 +3,7 @@ import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import React, { Fragment, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { GetAny, PostAny, responseToast } from "../../main";
+import {FiSend} from 'react-icons/fi';
 import "./modal.scss";
 
 function classNames(...classes) {
@@ -44,7 +45,7 @@ const SendHold = ({data2}) => {
                 <button
                     onClick={(e) => setModalShow(!modalShow)}
                     className="bg-sr text-white px-2 py-1 rounded-md">
-                    Versturen
+                     <FiSend className="w-5 h-5"/>
                 </button>
                 <Modal
                     show={modalShow} onHide={handleClose}

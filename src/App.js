@@ -62,8 +62,8 @@ function App() {
             <Private exact path="/edit/:id">
               <Edit />
             </Private>{" "}
-            <Private exact path="/delete/:id">
-              <Delete page={"archive"} />{" "}
+            <Private exact path="/delete/:page/:id">
+              <Delete />{" "}
             </Private>{" "}
             <Private exact path="/hold">
               <Hold />

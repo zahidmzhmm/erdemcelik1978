@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { GetAny } from "../../main";
 import "./progress.css";
 import SendHold from "./SendHold";
-
+import {AiFillDelete} from 'react-icons/ai';
+import {MdModeEdit} from 'react-icons/md';
 const Hold = () => {
   const [holdData, setHoldData] = React.useState(false);
   React.useEffect(() => {
@@ -63,11 +64,16 @@ const Hold = () => {
             email: data.email,
             action: (
               <div className="flex items-center">
-                <div className="flex items-center flex-col gap-1">
+                <div className="flex items-center gap-1">
                   <SendHold data2={data} />
                   <Link to={"/edit/" + data.id}>
+                    <button className="bg-sr ml-2 text-white px-2 py-2 rounded-md">
+                      <MdModeEdit />
+                    </button>
+                  </Link>
+                  <Link to={"/delete/progress/" + data.id}>
                     <button className="bg-sr ml-2 text-white px-2 py-1 rounded-md">
-                      Bewerken
+                      <AiFillDelete className="w-5 h-5" />
                     </button>
                   </Link>
                 </div >

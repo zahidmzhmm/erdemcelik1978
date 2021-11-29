@@ -1,3 +1,5 @@
+
+
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
@@ -9,28 +11,32 @@ import { useParams } from "react-router-dom";
 import { GetAny, PostAny, responseToast } from "../../main";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { Spinner } from 'react-bootstrap';
+
 export default function Edit() {
   const { id } = useParams();
   const [data, setData] = React.useState(false);
   const [previewitems, setPreviewitems] = React.useState([])
   const [loader, setLoader] = useState(false)
+  const [storefiles, setStorefiles] = useState([])
+  const [reload, setReload] = useState(false)
   React.useEffect(() => {
-    if (data === false) {
-      GetAny("viewTask?id=" + id).then((response) => {
-        console.log(response)
-        // setPreviewitems(response.data.files)
-        setData(response.data.task);
-        setCompany(response.data.task.c_name);
-        setName(response.data.task.name);
-        setPhone(response.data.task.phone);
-        setAddress(response.data.task.address);
-        setEmail(response.data.task.email);
-        setNotes(response.data.task.notes);
-        setStatus(response.data.task.status);
-        setWhatsapp(response.data.task.whatsapp)
-      });
-    }
-  });
+    GetAny("viewTask?id=" + id).then((response) => {
+      console.log(response)
+      setData(response.data.task);
+      setCompany(response.data.task.c_name);
+      setName(response.data.task.name);
+      setPhone(response.data.task.phone);
+      setAddress(response.data.task.address);
+      setEmail(response.data.task.email);
+      setNotes(response.data.task.notes);
+      setWhatsapp(response.data.task.whatsapp)
+      // console.log(response.data.files)
+      if (response.data.files) {
+        setStorefiles(response.data.files)
+      }
+
+    });
+  }, [reload]);
   const [start, setStart] = React.useState(new Date());
   const [end, setEnd] = React.useState(new Date());
   const [company, setCompany] = React.useState("");
@@ -40,7 +46,7 @@ export default function Edit() {
   const [email, setEmail] = React.useState("");
   const [notes, setNotes] = React.useState("");
   // const [fileUpload, setFileUpload] = React.useState("");
-  const [status, setStatus] = React.useState("");
+  const [status, setStatus] = React.useState("3");
   const [whatsapp, setWhatsapp] = React.useState("");
 
 
@@ -63,6 +69,7 @@ export default function Edit() {
     for (let i = 0; i < previewitems.length; i++) {
       formData.append(`files[${i}]`, previewitems[i])
     }
+    // console.log(status)
     PostAny("editTask", formData).then((response) => {
       setLoader(false)
       console.log(response)
@@ -73,21 +80,34 @@ export default function Edit() {
     );
   };
   const filePreview = (data) => {
+
     let items = [];
     for (let i = 0; i < data.length; i++) {
       items[i] = data[i];
     }
     // console.log(items[0].name)
     setPreviewitems(previewitems.concat(items))
-
+    // console.log(previewitems.concat(items))
 
   }
   const filterItem = (data) => {
     const filterarray = previewitems.filter((item) => item !== data)
-
+    // console.log(filterarray)
     setPreviewitems(filterarray)
 
   }
+
+  const delteFiles = (id) => {
+
+    GetAny("deleteFiles?id=" + id).then((response) => {
+      // console.log(response)
+      if (response.status == 200) {
+        // console.log("here")
+        setReload(true)
+      }
+    })
+  }
+
   if (data !== false) {
     return (
       <>
@@ -115,14 +135,18 @@ export default function Edit() {
                       STATUS <BsThreeDotsVertical className="ml-2" />
                     </label>
                     <select
-                      onChange={(e) => setStatus(e.target.value)}
+                      onChange={(e) => {
+                        setStatus(e.target.value)
+                        console.log(e.target.value)
+                      }}
                       className="browser-default bg-pr text-white custom-select w-48"
                     >
-                      <option value="1">Afgerond</option>
-                      <option value="2">Wacht</option>
-                      <option selected value="3">
+                      <option value="3">
                         Meten
                       </option>
+                      <option value="1">Afgerond</option>
+                      <option value="2">Wacht</option>
+
                       <option value="4">Archief</option>
                     </select>
                   </div>
@@ -279,13 +303,8 @@ export default function Edit() {
                 <div>
                   <div className="mt-1 flex justify-center px-3 pt-3 pb-1 border-2 border-gray-300 border-dashed rounded-md">
                     <div className="space-y-1 text-center">
-                      {previewitems.length !== 0 ?
-                        <div className="text-white">{previewitems.map((item, ind) => (
-                          <div key={ind} className="text-white flex items-center gap-1">
-                            <p className="text-sm">{item.name}</p>
-                            <AiFillCloseCircle onClick={() => filterItem(item)} className="ml-2 text-white cursor-pointer" /> </div>
-                        ))}</div>
-                        : <svg
+                      {(storefiles.length === 0 && previewitems.length === 0) &&
+                        <svg
                           className="mx-auto h-12 w-12 text-gray-400"
                           stroke="currentColor"
                           fill="none"
@@ -298,25 +317,25 @@ export default function Edit() {
                             strokeLinecap="round"
                             strokeLinejoin="round"
                           />
-                        </svg>}
+                        </svg>
+                      }
+                      {
+                        storefiles.length !== 0 &&
+                        <div className="text-white">{storefiles.map((item, ind) => (
+                          <div key={ind} className="text-white flex items-center gap-1">
+                            <p className="text-sm">{item.path}</p>
+                            <AiFillCloseCircle onClick={() => delteFiles(item.id)} className="ml-2 text-white cursor-pointer" /> </div>
+                        ))}</div>
+                      }
+                      {previewitems.length !== 0 &&
+                        <div className="text-white">{previewitems.map((item, ind) => (
+                          <div key={ind} className="text-white flex items-center gap-1">
+                            <p className="text-sm">{item.name}</p>
+                            <AiFillCloseCircle onClick={() => filterItem(item)} className="ml-2 text-white cursor-pointer" /> </div>
+                        ))}</div>
+                      }
                       <div className="flex text-sm text-gray-600">
-                        {/* <label
-                          htmlFor="file-upload"
-                          className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-                        >
-                          <span>Een bestand uploaden</span>
-                          <input
-                            id="file-upload"
-                            name="file-upload"
-                            type="file"
-                            multiple
-                            onChange={(e) => {
-                              filePreview(e.target.files)
 
-                            }}
-                            className="sr-only"
-                          />
-                        </label> */}
                         <div class="form-group">
                           <label for="exampleFormControlFile1" className="text-white bg-sr px-1 py-1 rounded-sm cursor-pointer">Een bestand uploaden</label>
                           <input hidden multiple type="file" onChange={(e) => {

@@ -5,6 +5,8 @@ import { GetAny } from "../../main";
 import { UserDataContext } from "../Private";
 import "./progress.css";
 import SendModal from "./SendModal";
+import { AiFillDelete } from "react-icons/ai"
+import { MdModeEdit } from "react-icons/md"
 
 const Progress = () => {
   const userData = React.useContext(UserDataContext);
@@ -57,7 +59,7 @@ const Progress = () => {
         },
       ],
       rows: progressData.map(
-        (data, index) =>
+        (data) =>
           data.status == 3 && {
             id: data.id,
             company: data.c_name,
@@ -69,9 +71,14 @@ const Progress = () => {
               userData.role == "admin" ? (
                 <>
                   <SendModal data2={data} />
-                  <Link className="mt-1" to={"/edit/" + data.id}>
+                  <Link to={"/edit/" + data.id}>
+                    <button className="bg-sr ml-2 text-white px-2 py-2 rounded-md">
+                      <MdModeEdit />
+                    </button>
+                  </Link>
+                  <Link to={"/delete/progress/" + data.id}>
                     <button className="bg-sr ml-2 text-white px-2 py-1 rounded-md">
-                    Bewerken
+                      <AiFillDelete className="w-5 h-5" />
                     </button>
                   </Link>
                 </>
@@ -79,7 +86,7 @@ const Progress = () => {
                 <>
                   <Link to={"/staff/task/addData/" + data.id}>
                     <button className="bg-sr ml-2 text-white px-2 py-1 rounded-md">
-                    Gegevens toevoegen
+                      Gegevens toevoegen
                     </button>
                   </Link>
                 </>

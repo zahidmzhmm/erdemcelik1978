@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
 import {GetAny, responseToast} from "../../main";
 
-const Delete = ({page}) => {
-    const {id} = useParams();
+const Delete = () => {
+    const {id, page} = useParams();
     const history = useHistory();
     const [update, setUpdate] = useState(true);
 
@@ -11,6 +11,7 @@ const Delete = ({page}) => {
     React.useEffect(() => {
         if (update === true) {
             GetAny("deleteTask?id=" + id).then((response) => {
+                // console.log(response)
                 responseToast(response.message, response.type);
                 setTimeout(() => {
                     history.push("/" + page)

@@ -2,6 +2,7 @@ import { MDBDataTable } from "mdbreact";
 import React from "react";
 import { FaDownload } from "react-icons/fa";
 import { MdModeEdit } from "react-icons/md";
+import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { apiURI, GetAny } from "../../main";
 import "./progress.css";
@@ -73,6 +74,11 @@ const Complete = () => {
                     <MdModeEdit />
                   </button>
                 </Link>
+                <Link to={"/delete/complete/" + data.id}>
+                    <button className="bg-sr ml-2 text-white px-2 py-1 rounded-md">
+                      <AiFillDelete className="w-5 h-5" />
+                    </button>
+                  </Link>
               </div>
             ),
           }
