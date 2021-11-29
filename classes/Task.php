@@ -63,8 +63,6 @@ class Task
     public function edit($data)
     {
         $id = $data['id'];
-        $start = $this->db->real_scape_str($data['start']);
-        $end = $this->db->real_scape_str($data['end']);
         $c_name = $this->db->real_scape_str($data['c_name']);
         $name = $this->db->real_scape_str($data['name']);
         $phone = $this->db->real_scape_str($data['phone']);
@@ -75,7 +73,7 @@ class Task
         $whatsapp = $data['whatsapp'];
         $file_count = count($_FILES['files']['name']);
         if ($file_count > 0) {
-            $this->db->delete("delete from tbl_files where task_id='$id'");
+            //$this->db->delete2("delete from tbl_files where task_id='$id'");
             for ($i = 0; $i < $file_count; $i++) {
                 $file_name = $_FILES['files']['name'][$i];
                 $tmp_name = $_FILES['files']['tmp_name'][$i];
@@ -126,10 +124,12 @@ class Task
     {
         $checking = $this->db->num_rows("select id from tasks where id='$id'");
         if ($checking > 0) {
+            $this->db->delete2("DELETE FROM `send_alert` WHERE task_id='$id'");
+            $this->db->delete2("DELETE FROM `tbl_files` WHERE task_id='$id'");
             $this->db->delete("DELETE FROM `tasks` WHERE id='$id'");
-            $this->db->delete("DELETE FROM `tbl_files` WHERE task_id='$id'");
             exit;
         }
         $this->core->response("Data not found!");
+        exit;
     }
 }

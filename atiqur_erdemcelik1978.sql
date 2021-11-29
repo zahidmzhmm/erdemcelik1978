@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 26, 2021 at 10:47 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.12
+-- Host: localhost:3306
+-- Generation Time: Nov 29, 2021 at 07:07 AM
+-- Server version: 10.5.13-MariaDB-cll-lve
+-- PHP Version: 7.3.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `erdemcelik1978`
+-- Database: `atiqur_erdemcelik1978`
 --
 
 -- --------------------------------------------------------
@@ -33,6 +34,13 @@ CREATE TABLE `send_alert` (
   `task_id` int(11) NOT NULL,
   `role` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `send_alert`
+--
+
+INSERT INTO `send_alert` (`id`, `staff_id`, `task_id`, `role`) VALUES
+(1, 4, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -54,6 +62,13 @@ CREATE TABLE `tasks` (
   `end` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tasks`
+--
+
+INSERT INTO `tasks` (`id`, `c_name`, `name`, `phone`, `address`, `whatsapp`, `email`, `notes`, `status`, `start`, `end`) VALUES
+(3, 'Com name2', 'Admin Panel T2', '0123456789', 'sdgsdgsdg', '1212', 'admin@admin.com', 'sdsdgsdg', 0, '', '');
+
 -- --------------------------------------------------------
 
 --
@@ -65,6 +80,15 @@ CREATE TABLE `tbl_files` (
   `path` varchar(100) NOT NULL,
   `task_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_files`
+--
+
+INSERT INTO `tbl_files` (`id`, `path`, `task_id`) VALUES
+(45, '193878fbf2.png', 3),
+(46, '2174867f44.PNG', 3),
+(47, '9159558a04.PNG', 3);
 
 -- --------------------------------------------------------
 
@@ -88,8 +112,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `token`, `phone`, `whatsapp`, `role`) VALUES
-(1, 'Admin Panel', 'admin@admin.com', 'admin12123', '73cbfdf4239ab7c73ef7b4ca413eb423f32775aa', '0123456789', '0123456789', 'admin'),
-(2, 'Staff 02', 'staff2@staff.com', 'staff12123', '88fc795acf6bdb5034989d6244ea892fe4a48fa8', '0123456789', '0123456789', 'staff');
+(1, 'Admin Panel', 'admin@admin.com', 'admin12123', '73cbfdf4239ab7c73ef7b4ca413eb423f32775aa', '012345679', '012345679', 'admin'),
+(2, 'Staff 03', 'staff@staff.com', 'staff@12345S', 'a264d5aa48bd73eccb43869519853ef07b97d028', '0123456789', '0123456789', 'staff'),
+(3, 'Erdem Celik', 'info@prestigebv.nl', '', '86a6ac6d12b569d0c5ba9d7ca5bfd603c97594d2', '0704020901', '0621444444', 'admin'),
+(4, 'Sohan', 'sohanurrahmants@gmail.com', 'sohan123', '147c10287cde6d17cf1d6436e76563053b61b16b', '01795421691', '01795421691', 'staff');
 
 --
 -- Indexes for dumped tables
@@ -132,25 +158,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `send_alert`
 --
 ALTER TABLE `send_alert`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `tbl_files`
 --
 ALTER TABLE `tbl_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

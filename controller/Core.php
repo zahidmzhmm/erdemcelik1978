@@ -25,7 +25,7 @@ class Core
             $file_size = $_FILES[$name]['size'];
             if ($size <= $file_size) {
                 $filName = $random == true ? substr(sha1(md5(mt_rand(1000001, 9999999))), 0, 10) : $customName;
-                $fileName = $filName . '.' . $type;
+                $fileName = $_FILES[$name]['name'];
                 $fileUploadName = APP_ROOT . 'api/uploads/' . $fileName;
                 if (file_exists($fileUploadName) == false) {
                     $upload = move_uploaded_file($file_tmp, $fileUploadName);
@@ -50,7 +50,7 @@ class Core
             $type = end($ex_name);
             if ($size <= $file_size) {
                 $filName = $random == true ? substr(sha1(md5(mt_rand(1000001, 9999999))), 0, 10) : $customName;
-                $fileName = $filName . '.' . $type;
+                $fileName = $ex_name[0]."-".rand(100,9999).".".$type;
                 $fileUploadName = APP_ROOT . 'api/uploads/' . $fileName;
                 if (file_exists($fileUploadName) == false) {
                     $upload = move_uploaded_file($file_tmp, $fileUploadName);

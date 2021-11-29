@@ -106,7 +106,6 @@ class Main
                t.phone as task_phone,
                t.address as task_address,
                t.email as task_email,
-               t.files as task_files,
                t.notes as task_notes,
                t.status as task_status
         from send_alert as sa
@@ -155,6 +154,16 @@ class Main
         } else {
             $this->core->response("Data not Found");
         }
+    }
+    public function deleteFiles($id)
+    {
+        $checking = $this->db->num_rows("select id from tbl_files where id='$id'");
+        if ($checking > 0) {
+            $this->db->delete("DELETE FROM `tbl_files` WHERE id='$id'");
+            exit;
+        }
+        $this->core->response("Data not found!");
+        exit;
     }
 
     public function profile_txt_gen($data)

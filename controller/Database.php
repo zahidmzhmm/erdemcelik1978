@@ -56,6 +56,10 @@ class Database
             $this->core->response("Data not Found!");
         }
     }
+    public function delete2($sql)
+    {
+        $this->query($sql);
+    }
 
     public function real_scape_str($str)
     {
