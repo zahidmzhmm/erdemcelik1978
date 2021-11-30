@@ -14,7 +14,7 @@ const Progress = () => {
   React.useEffect(() => {
     if (progressData === false) {
       GetAny("tasks").then((response) => {
-        // console.log(response)
+        // console.log(response.data)
         setProgressData(response.data);
       });
     }
@@ -60,6 +60,7 @@ const Progress = () => {
       ],
       rows: progressData.map(
         (data) =>
+       
           data.status == 3 && {
             id: data.id,
             company: data.c_name,

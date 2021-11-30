@@ -1,9 +1,9 @@
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
 import {
-    BrowserRouter as Router,
-    Redirect,
-    Route,
-    Switch
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch
 } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./components/auth/Login";
@@ -14,6 +14,7 @@ import Dashboard from "./components/pages/Dashboard";
 import Delete from "./components/pages/Delete";
 import Download from "./components/pages/Download";
 import Edit from "./components/pages/Edit";
+import Edituser from "./components/pages/Edituser";
 import Hold from "./components/pages/Hold";
 import NewTask from "./components/pages/NewTask";
 import Progress from "./components/pages/Progress";
@@ -27,6 +28,7 @@ export const MainWrapper = createContext();
 
 function App() {
   let data;
+  const [editmodal, setEditmodal] = useState(false)
   return (
     <MainWrapper.Provider value={data}>
       <div className="bg-bg overflow-x-hidden">
@@ -62,6 +64,9 @@ function App() {
             <Private exact path="/edit/:id">
               <Edit />
             </Private>{" "}
+            <Private exact path="/useredit/:id">
+              <Edituser />
+            </Private>{" "}
             <Private exact path="/delete/:page/:id">
               <Delete />{" "}
             </Private>{" "}
@@ -72,7 +77,7 @@ function App() {
               <Complete />
             </Private>{" "}
             <Private exact path="/users">
-              <Users />
+              <Users/>
             </Private>{" "}
             <Private exact path="/archive">
               <Archive />

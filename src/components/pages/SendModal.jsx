@@ -21,14 +21,16 @@ const SendModal = ({ data2 }) => {
     React.useEffect(() => {
         if (data === false) {
             GetAny("users").then((response) => {
-                setData(response.data)
-                setSelected(response.data[0])
+                const filterdata = response.data.filter((item) => item.deleted !== "1" && item.role !== "admin")
+                // console.log(filterdata)
+                setData(filterdata)
+                setSelected(filterdata[0])
             })
         }
     })
     const formSubmit = (e) => {
         e.preventDefault()
-        // console.log(data2)
+           
         const formData = new FormData();
         formData.append("staff_id", selected.id);
         formData.append("task_id", data2.id);

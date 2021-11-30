@@ -9,6 +9,7 @@ export default function AddData() {
   const { id } = useParams();
   const [data, setData] = React.useState(false);
   const history = useHistory();
+  
   const [previewitems, setPreviewitems] = React.useState([])
   const [start, setStart] = React.useState(new Date());
   const [end, setEnd] = React.useState(new Date());
@@ -229,6 +230,7 @@ export default function AddData() {
                   </label>
                   <textarea
                     name="notes"
+                    
                     id="notes"
                     value={notes}
                     cols="30"
