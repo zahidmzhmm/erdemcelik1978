@@ -78,7 +78,7 @@ const StaffProgress = () => {
     };
     return (
       <>
-        <div className="bg-pr text-white p-4 rounded-md">
+        <div className="bg-pr text-white p-4 rounded-md mx-5">
           <h1 className="text-white font-medium text-center text-3xl">
             VOORTGANG TAKEN
           </h1>
