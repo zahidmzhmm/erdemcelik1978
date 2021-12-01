@@ -50,7 +50,7 @@ class Task
             }
             if ($status == 1) {
                 $staff = STAFF;
-                $this->mailer->task_done("Task Finished <br><br> <a href='" . API_URI . "/taskView/$tid'>View Task</a>");
+                $this->mailer->task_done("<h1 class='text-center'>De opdracht is zojuist afgerond!</h1>"."<br><br>Bedrijfsnaam:".$c_name."<br><br>Naam: ".$name."<br><br>Telefoon: ".$phone."<br><br>Adres: ".$address."<br><br>Email: ".$email."<br><br>Whatsapp: ".$whatsapp."<br><br> <a href='" . API_URI . "/edit/$tid'>bekijk aanvraag</a>");
                 $this->db->insert2("insert into send_alert (staff_id, task_id, role) values ('$staff','$tid')", "send_alert");
             }
             $this->core->response("Success", "success", 200, $data2);
@@ -83,7 +83,7 @@ class Task
             }
         }
         if ($status == 1) {
-            $this->mailer->task_done("Task Finished <br><br> <a href='" . API_URI . "/taskView/$id'>View Task</a>");
+            $this->mailer->task_done("<h1 class='text-center'>De opdracht is zojuist afgerond!</h1>"."<br><br>Bedrijfsnaam:".$c_name."<br><br>Naam: ".$name."<br><br>Telefoon: ".$phone."<br><br>Adres: ".$address."<br><br>Email: ".$email."<br><br>Whatsapp: ".$whatsapp."<br><br> <a href='" . API_URI . "/edit/$id'>bekijk aanvraag</a>");
         }
         $this->db->update("
         update tasks

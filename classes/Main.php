@@ -72,17 +72,25 @@ class Main
             t.address as task_address,
             t.email as task_email,
             t.notes as task_notes,
-            t.status as task_status
+            t.status as task_status,
+            t.whatsapp as task_whatsapp
         from send_alert as sa
                  join users u on sa.staff_id = u.id
                  join tasks t on sa.task_id = t.id
         where sa.id='$id'
         ");
         if ($data !== false) {
-            $sa_id = $data['sa_id'];
+            $task_id = $data['task_id'];
+            $task_cname = $data['task_cname'];
+            $task_name = $data['task_name'];
+            $task_phone = $data['task_phone'];
+            $task_address = $data['task_address'];
+            $task_email = $data['task_email'];
+            $task_notes = $data['task_notes'];
             $user_name = $data['user_name'];
             $user_email = $data['user_email'];
-            $body = API_URI . "/staff/task/addData/" . $sa_id;
+            $task_whatsapp = $data['task_whatsapp'];
+            $body = "<h2 class='text-center'>Bedrijf inmeten</h2><br><br>Bedrijfsnaam: ".$task_cname."<br><br>Naam: ".$task_name."<br><br>Telefoon: ".$task_phone."<br><br>Adres: ".$task_address."<br><br>Whatsapp: ".$task_whatsapp."<br><br> <a href='" . API_URI . "/staff/task/addData/$task_id'>bekijk aanvraag</a>";
             $this->mailer->task_mail($user_email, $body);
             $this->core->response("Success", "success", 200, $data);
         } else {
@@ -107,7 +115,8 @@ class Main
                t.address as task_address,
                t.email as task_email,
                t.notes as task_notes,
-               t.status as task_status
+               t.status as task_status,
+               t.whatsapp as task_whatsapp
         from send_alert as sa
             join users u on sa.staff_id = u.id
             join tasks t on sa.task_id = t.id
