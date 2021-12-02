@@ -1,8 +1,7 @@
-// export const mainURI = "https://crownedtutors.com";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export const mainURI = "https://erdemcelik.fazgroupltd.com";
+export const mainURI = "https://backend.prestigecloud.nl";
 export const apiURI = mainURI + "/api/";
 export const headers = {
     'x-api-key': 'admin12123'
